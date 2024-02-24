@@ -9,13 +9,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <!-- <h1 class="text-center" id="spy">Spy</h1> -->
+    <!-- <h1 class="text-center" id="spy">Spy game</h1> -->
+    <div style="display: flex; justify-content: center; align-items: center;"><img id="logo" src="./images/spy.jpeg" alt=""></div>
     <div class="players-container">
-        <img id="logo" src="./images/spy.jpeg" alt="">
         <label for="players-input">Enter player count:</label>
         <input type="number" id="players-input" class="player-count" min="3" max="100" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
         <button id="start-btn" class="btn btn-dark " onclick="startGame(document.querySelector('#players-input').value)">Start</button>
         <p id="player-count-wrong">Error: Player count must be between 3 and 100</p>
+    </div>
+    
+    <div class="language-selector">
+      <label for="language-select">Select language:</label>
+      <select id="language-select" onchange="selectLanguage(this.value)">
+        <option value="en">🇺🇸English</option>
+        <option value="ru">🇷🇺Русский</option>
+      </select>
     </div>
 
     <div id="new-game-btn-container">
@@ -38,7 +46,6 @@
 
 
     <!-- <h1>Rules: </h1> -->
-
 
     <script src="./script.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>

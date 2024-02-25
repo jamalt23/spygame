@@ -52,7 +52,6 @@ var playerCountWrong = document.querySelector('#player-count-wrong');
 var wordTag = document.querySelector('.word');
 var newGameBtnContainer = document.querySelector('#new-game-btn-container')
 var newGameBtn = document.querySelector('.btn-new-game');
-var words = words_eng
 
 function selectLanguage(lang) {
     var select = document.getElementById("language-select");
@@ -69,7 +68,10 @@ function selectLanguage(lang) {
         document.querySelector('.player-card-bad p').textContent = "You are"
         document.querySelector('.player-card-bad h1').textContent = "Spy"
         document.querySelector('.player-card-good p').textContent = "The word is:"
-
+        for (hideBtn of document.querySelectorAll('.btn-hide')) {
+            hideBtn.textContent = "Hide"
+        }
+        
     } else if (lang === "ru") {
         words = words_rus
         label.textContent = "Выберите язык:";
@@ -81,8 +83,12 @@ function selectLanguage(lang) {
         document.querySelector('.player-card-bad p').textContent = "Вы"
         document.querySelector('.player-card-bad h1').textContent = "Шпион"
         document.querySelector('.player-card-good p').textContent = "Слово:"
+        for (hideBtn of document.querySelectorAll('.btn-hide')) {
+            hideBtn.textContent = "Скрыть"
+        }
     }
   }
+selectLanguage("en")
 
 function startGame(playerCount){
     word = words[Math.floor(Math.random() * words.length)];

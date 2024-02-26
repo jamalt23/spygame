@@ -125,12 +125,10 @@ function chooseRole(){
     clicks += 1
     var playerCount = playerCountInput.value;
     var role = list[getRandomInt(0, list.length-1)];
-    console.log(list);
     if (clicks < playerCount){
         if (role == "Spy" && spy!="true") {
             playerCardGood.style.display = 'none';
             playerCardBad.style.display = 'flex';
-            // console.log("Spy is here");
             spy = "true"
         }
         else {

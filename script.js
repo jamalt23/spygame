@@ -90,8 +90,14 @@ function selectLanguage(lang) {
   }
 selectLanguage("en")
 
+function getRandomInt(min, max) {
+    var array = new Uint32Array(1);
+    window.crypto.getRandomValues(array);
+    return Math.floor(array[0] / (0xffffffff + 1) * (max - min + 1) + min);
+}
+
 function startGame(playerCount){
-    word = words[Math.floor(Math.random() * words.length)];
+    word = words[getRandomInt(1, words.length)];
     wordTag.innerText = word;
     if (spy=="true"){
         window.location.reload();
@@ -102,6 +108,10 @@ function startGame(playerCount){
         console.log('The game started.')
         playersContainer.style.display = 'none';
         gameContainer.style.display = 'flex';
+        list = ["Spy"]
+        for (let i = 0; i < playerCount; i++) {
+            list.push(word)
+}
     }
     else {
         playerCountWrong.style.display = 'inherit';
@@ -114,16 +124,13 @@ clicks = -1
 function chooseRole(){
     clicks += 1
     var playerCount = playerCountInput.value;
-    list = ["Spy"]
-    for (let i of playerCount) {
-        list.push(word)
-    }
-    var randomNumber = Math.floor(Math.random() * playerCount) + 1;
-    var role = list[Math.floor(Math.random() * list.length)];
+    var role = list[getRandomInt(0, list.length-1)];
+    console.log(list);
     if (clicks < playerCount){
         if (role == "Spy" && spy!="true") {
             playerCardGood.style.display = 'none';
             playerCardBad.style.display = 'flex';
+            // console.log("Spy is here");
             spy = "true"
         }
         else {

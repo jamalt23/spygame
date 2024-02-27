@@ -8,6 +8,11 @@ body{
     color: darkred;
     font-weight: 700;
 }
+.logo-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #logo{
     width: 300px;
     opacity: 50%;
@@ -15,6 +20,7 @@ body{
 label{
     color: white;
     font-size: 30px;
+    text-align: center;
 }
 .players-container{
     margin-top: 20px;

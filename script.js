@@ -41,6 +41,7 @@ const words_rus = [
     "Жара", "Капюшон", "Вилка", "Джем", "Букет", "Паста", "Мышь", "Пол", "Сирень"
 ]
 
+const mediaQuery = window.matchMedia('only screen and (max-width: 767px)')
 var startButton = document.querySelector('#start-btn');
 var playersContainer = document.querySelector('.players-container');
 var playerCountInput = document.querySelector('#players-input');
@@ -105,6 +106,9 @@ function startGame(playerCount){
     playerCount = parseInt(playerCount);
     if (playerCount > 2 && playerCount < 101) {
         playerCountWrong.style.display = 'none';
+        if (mediaQuery.matches) {
+            document.querySelector('.logo-container').style.display = 'none'
+        }
         console.log('The game started.')
         playersContainer.style.display = 'none';
         gameContainer.style.display = 'flex';

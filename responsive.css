@@ -1,0 +1,12 @@
+@media only screen and (max-width: 767px) {
+    .language-selector {
+        position: inherit;
+        margin-top: 10px;
+    }
+    .btn-hide{
+        top: 450px !important;
+    }
+    .player-card{
+        margin-top: 60px;
+    }
+}

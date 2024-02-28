@@ -113,7 +113,7 @@ function startGame(playerCount){
         playersContainer.style.display = 'none';
         gameContainer.style.display = 'flex';
         list = ["Spy"]
-        for (let i = 0; i < playerCount; i++) {
+        for (let i = 1; i < playerCount; i++) {
             list.push(word)
 }
     }
@@ -127,6 +127,7 @@ clicks = -1
 
 function chooseRole(){
     clicks += 1
+    console.log(list)
     var playerCount = playerCountInput.value;
     var role = list[getRandomInt(0, list.length-1)];
     if (clicks < playerCount){
@@ -146,6 +147,7 @@ function chooseRole(){
         playersContainer.style.display = 'none';
         newGameBtnContainer.style.display = 'flex';
     }
+    console.log(list)
 }
 
 function hideCards(){

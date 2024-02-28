@@ -6,6 +6,10 @@
     .btn-hide{
         top: 450px !important;
     }
+    .btn-new-game{
+        font-size: 40px !important;
+        width: 300px !important;
+    }
     .player-card{
         margin-top: 60px;
     }

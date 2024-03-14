@@ -31,7 +31,7 @@ const words_rus = [
     "Телефон", "Ложка", "Мышь", "Камень", "Булка", "Весна", "Зерно", "Вода", "Стрела", "Рыба", "Бабочка",
     "Змея", "Ведро", "Корабль", "Воздух", "Окно", "Полка", "Лук", "Капля", "Ворот", "Баран", "Меч", "Жираф",
     "Ворона", "Крышка", "Пушка", "Карась", "Слон", "Зебра", "Баба", "Подарок", "Санки", "Крот", "Кукуруза",
-    "Салат", "Гитара", "Карандаш", "Доска", "Шапка", "Кукла", "Колбаса", "Погода", "Чашка", "Черника", "Мышь",
+    "Гитара", "Карандаш", "Доска", "Шапка", "Кукла", "Колбаса", "Погода", "Чашка", "Черника", "Мышь",
     "Орех", "Поцелуй", "Чаша", "Капуста", "Тень", "Дракон", "Платье", "Болт", "Дочь", "Мыло", "Диван", "Джинсы",
     "Язык", "Губка", "Картон", "Пельмени", "Коньяк", "Гора", "Ладонь", "Стол", "Лента", "Шарф", "Маска", "Лужа",
     "Яйцо", "Подушка", "Пламя", "Шоколад", "Портфель", "Лук", "Дерево", "Блюдо", "Корень", "Замок", "Клетка",
@@ -145,10 +145,23 @@ function chooseRole(){
         gameContainer.style.display = 'none';
         playersContainer.style.display = 'none';
         newGameBtnContainer.style.display = 'flex';
+        document.querySelector('.logo-container').style.display = 'flex'
     }
 }
 
 function hideCards(){
     playerCardGood.style.display = 'none';
     playerCardBad.style.display = 'none';
+}
+
+function newGame(){
+    word = words[getRandomInt(1, words.length)];
+    wordTag.innerText = word;
+    startButton.display = "flex"
+    playersContainer.style.display = 'flex';
+    newGameBtnContainer.style.display = 'none';
+    document.querySelector('.logo-container').style.display = 'flex'
+    spy = "false"
+    clicks = -1
+    list = ["Spy"]
 }

@@ -36,6 +36,9 @@ label{
     padding: 5px;
     width: 90px;
 }
+button{
+    border-radius: 10px !important;
+}
 #start-btn{
     font-size: 30px;
     padding: 10px;
@@ -43,9 +46,9 @@ label{
     margin-top: 30px;
 }
 .btn-new-game{
-    font-size: 30px;
-    padding: 10px;
-    width: 140px;
+    font-size: 40px !important;
+    padding: 10px !important;
+    width: 300px;
     margin-top: 30px;
 }
 #new-game-btn-container{

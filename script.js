@@ -80,7 +80,7 @@ function selectLanguage(lang) {
         startButton.textContent = "Начать";
         chooseButton.textContent = "Выбрать";
         newGameBtn.textContent = "Новая игра";
-        document.querySelector('.players-container label').textContent = "Введите количество игроков:"
+        document.querySelector('.players-container label').textContent = "Введите кол-во игроков:"
         document.querySelector('.player-card-bad p').textContent = "Вы"
         document.querySelector('.player-card-bad h1').textContent = "Шпион"
         document.querySelector('.player-card-good p').textContent = "Слово:"
@@ -115,7 +115,7 @@ function startGame(playerCount){
         list = ["Spy"]
         for (let i = 1; i < playerCount; i++) {
             list.push(word)
-}
+        }
     }
     else {
         playerCountWrong.style.display = 'inherit';
@@ -127,7 +127,6 @@ clicks = -1
 
 function chooseRole(){
     clicks += 1
-    console.log(list)
     var playerCount = playerCountInput.value;
     var role = list[getRandomInt(0, list.length-1)];
     if (clicks < playerCount){
@@ -147,7 +146,6 @@ function chooseRole(){
         playersContainer.style.display = 'none';
         newGameBtnContainer.style.display = 'flex';
     }
-    console.log(list)
 }
 
 function hideCards(){

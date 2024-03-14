@@ -59,6 +59,7 @@ function selectLanguage(lang) {
     var label = document.querySelector(".language-selector label");
 
     if (lang === "en") {
+        localStorage.setItem("language", "en");
         words = words_eng
         label.textContent = "Select language:";
         playerCountWrong.textContent = "Error: Player count must be between 3 and 100";
@@ -72,8 +73,10 @@ function selectLanguage(lang) {
         for (hideBtn of document.querySelectorAll('.btn-hide')) {
             hideBtn.textContent = "Hide"
         }
+        document.querySelector('#language-select').value = 'en'
         
     } else if (lang === "ru") {
+        localStorage.setItem("language", "ru");
         words = words_rus
         label.textContent = "Выберите язык:";
         playerCountWrong.textContent = "Ошибка: Количество игроков должно быть между 3 и 100";
@@ -87,9 +90,16 @@ function selectLanguage(lang) {
         for (hideBtn of document.querySelectorAll('.btn-hide')) {
             hideBtn.textContent = "Скрыть"
         }
+        document.querySelector('#language-select').value = 'ru'
     }
   }
-selectLanguage("en")
+
+if (localStorage.getItem("language") === "ru") {
+    selectLanguage("ru")
+}
+else {
+    selectLanguage("en")
+}
 
 function getRandomInt(min, max) {
     var array = new Uint32Array(1);

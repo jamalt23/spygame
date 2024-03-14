@@ -78,9 +78,9 @@ button{
     background-color: rgb(67, 67, 67);
     border-radius: 5px;
     padding: 55px;
-    padding-bottom: 140px;
-    height: 311px !important;
-    width: 248.390625px !important;
+    padding-bottom: 40px;
+    height: 311px;
+    width: 248.390625px;
     transition: .3s;
 }
 .player-card-text{
@@ -92,9 +92,10 @@ button{
     color: green;
 }
 .btn-hide{
-    position: absolute;
-    top: 640px !important;
+    /* position: absolute;
+    top: 640px !important; */
     font-size: 35px !important;
+    margin-top: 40px;
 }
 .player-card-bad{
     border: solid 1px red;
@@ -131,4 +132,20 @@ button{
 }
 #language-select:focus{
     outline: none;
+}
+footer{
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 93vh;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    padding: 5px 5px;
 }

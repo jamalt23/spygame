@@ -101,15 +101,24 @@ else {
     selectLanguage("en")
 }
 
+
 function getRandomInt(min, max) {
     var array = new Uint32Array(1);
     window.crypto.getRandomValues(array);
     return Math.floor(array[0] / (0xffffffff + 1) * (max - min + 1) + min);
 }
 
-function startGame(playerCount){
+function getRandomWord(){
     word = words[getRandomInt(1, words.length)];
     wordTag.innerText = word;
+    if (word.length >= 8) {
+        wordTag.style.fontSize = "2.5rem"
+    }
+    return word
+}
+
+function startGame(playerCount){
+    word = getRandomWord()
     if (spy=="true"){
         window.location.reload();
     }
@@ -165,8 +174,6 @@ function hideCards(){
 }
 
 function newGame(){
-    word = words[getRandomInt(1, words.length)];
-    wordTag.innerText = word;
     startButton.display = "flex"
     playersContainer.style.display = 'flex';
     newGameBtnContainer.style.display = 'none';

@@ -13,4 +13,16 @@
     .player-card{
         margin-top: 60px;
     }
+    body{
+        background-color: black !important;
+    }
+    .main{
+        background: linear-gradient(rgba(0, 0, 0, 0.776), rgba(0, 0, 0, 0.776)), url(./images/spy2.jpeg);
+        /* background-color: black !important; */
+        background-size: 20%;
+        height: 100vh;
+    }
+    footer{
+        position: inherit;
+    }
 }

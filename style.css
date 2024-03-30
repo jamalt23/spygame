@@ -70,8 +70,10 @@ button{
     width: 200px;
 }
 .player-card{
+    position: absolute;
+    top: 0;
     margin-top: 20px;
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -81,7 +83,8 @@ button{
     padding-bottom: 40px;
     height: 311px;
     width: 248.390625px;
-    transition: .3s;
+    transition: all .3s;
+    opacity: 0;
 }
 .player-card-text{
     font-size: 20px;

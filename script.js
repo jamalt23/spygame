@@ -48,17 +48,20 @@ var playerCountInput = document.querySelector('#players-input');
 var gameContainer = document.querySelector('.game-container');
 var playerCardGood = document.querySelector('.player-card-good');
 var playerCardBad = document.querySelector('.player-card-bad');
+var playerCards = document.querySelectorAll('.player-card');
 var chooseButton = document.querySelector('.choose-button');
 var playerCountWrong = document.querySelector('#player-count-wrong');
 var wordTag = document.querySelector('.word');
 var newGameBtnContainer = document.querySelector('#new-game-btn-container')
 var newGameBtn = document.querySelector('.btn-new-game');
+var gameStarted = false;
 
 function selectLanguage(lang) {
     var select = document.getElementById("language-select");
     var label = document.querySelector(".language-selector label");
 
     if (lang === "en") {
+        select.value = 'en'
         localStorage.setItem("language", "en");
         words = words_eng
         label.textContent = "Select language:";
@@ -73,9 +76,12 @@ function selectLanguage(lang) {
         for (hideBtn of document.querySelectorAll('.btn-hide')) {
             hideBtn.textContent = "Hide"
         }
-        document.querySelector('#language-select').value = 'en'
-        
+        if (gameStarted){
+            word = words[wordIndex]
+            wordTag.innerText = word
+        }
     } else if (lang === "ru") {
+        select.value = 'ru'
         localStorage.setItem("language", "ru");
         words = words_rus
         label.textContent = "Выберите язык:";
@@ -90,9 +96,12 @@ function selectLanguage(lang) {
         for (hideBtn of document.querySelectorAll('.btn-hide')) {
             hideBtn.textContent = "Скрыть"
         }
-        document.querySelector('#language-select').value = 'ru'
+        if (gameStarted) {
+            word = words[wordIndex]
+            wordTag.innerText = word
+        }
     }
-  }
+}
 
 if (localStorage.getItem("language") === "ru") {
     selectLanguage("ru")
@@ -114,6 +123,7 @@ function getRandomWord(){
     if (word.length >= 8) {
         wordTag.style.fontSize = "2.5rem"
     }
+    wordIndex = words.indexOf(word)
     return word
 }
 
@@ -124,6 +134,7 @@ function startGame(playerCount){
     }
     playerCount = parseInt(playerCount);
     if (playerCount > 2 && playerCount < 101) {
+        gameStarted = true;
         playerCountWrong.style.display = 'none';
         if (mediaQuery.matches) {
             document.querySelector('.logo-container').style.display = 'none'
@@ -135,6 +146,9 @@ function startGame(playerCount){
         for (let i = 1; i < playerCount; i++) {
             list.push(word)
         }
+        for (let card of playerCards) {
+            card.style.position = 'absolute';
+        }
     }
     else {
         playerCountWrong.style.display = 'inherit';
@@ -145,18 +159,27 @@ spy = "false"
 clicks = -1
 
 function chooseRole(){
+    for (let card of playerCards) {
+        card.style.position = 'inherit';
+    }
     clicks += 1
     var playerCount = playerCountInput.value;
     var role = list[getRandomInt(0, list.length-1)];
     if (clicks < playerCount){
         if (role == "Spy" && spy!="true") {
-            playerCardGood.style.display = 'none';
-            playerCardBad.style.display = 'flex';
+            playerCardGood.style.position = "absolute"
+            let card = playerCardBad
+            card.style.display = 'flex';
+            card.style.opacity = '0';
+            card.style.opacity = '1';
             spy = "true"
         }
         else {
-            playerCardGood.style.display = 'flex';
-            playerCardBad.style.display = 'none';
+            playerCardBad.style.position = "absolute"
+            let card = playerCardGood
+            card.style.display = 'flex';
+            card.style.opacity = '0';
+            card.style.opacity = '1';
         }
         list.splice(list.indexOf(role), 1);
     }
@@ -169,8 +192,22 @@ function chooseRole(){
 }
 
 function hideCards(){
-    playerCardGood.style.display = 'none';
-    playerCardBad.style.display = 'none';
+    var playerCount = playerCountInput.value;
+    for (let card of playerCards){
+        card.style.opacity = '0';
+        // card.addEventListener('transitionend', function(event) {
+        //     if (event.target === card) {
+        //     //   card.style.display = 'none';
+        //       card.removeEventListener('transitionend', arguments.callee, false);
+        //     }
+        // });
+    }
+    if (!(clicks+1 < playerCount)){
+        gameContainer.style.display = 'none';
+        playersContainer.style.display = 'none';
+        newGameBtnContainer.style.display = 'flex';
+        document.querySelector('.logo-container').style.display = 'flex'
+    }
 }
 
 function newGame(){

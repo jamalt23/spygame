@@ -110,7 +110,6 @@ else {
     selectLanguage("en")
 }
 
-
 function getRandomInt(min, max) {
     var array = new Uint32Array(1);
     window.crypto.getRandomValues(array);
@@ -146,9 +145,7 @@ function startGame(playerCount){
         for (let i = 1; i < playerCount; i++) {
             list.push(word)
         }
-        for (let card of playerCards) {
-            card.style.position = 'absolute';
-        }
+        hideCards(transition = false)
     }
     else {
         playerCountWrong.style.display = 'inherit';
@@ -160,26 +157,20 @@ clicks = -1
 
 function chooseRole(){
     for (let card of playerCards) {
-        card.style.position = 'inherit';
+        card.style.display = 'none';
     }
     clicks += 1
     var playerCount = playerCountInput.value;
     var role = list[getRandomInt(0, list.length-1)];
     if (clicks < playerCount){
         if (role == "Spy" && spy!="true") {
-            playerCardGood.style.position = "absolute"
             let card = playerCardBad
-            card.style.display = 'flex';
-            card.style.opacity = '0';
-            card.style.opacity = '1';
+            show(card)
             spy = "true"
         }
         else {
-            playerCardBad.style.position = "absolute"
             let card = playerCardGood
-            card.style.display = 'flex';
-            card.style.opacity = '0';
-            card.style.opacity = '1';
+            show(card)
         }
         list.splice(list.indexOf(role), 1);
     }
@@ -191,16 +182,10 @@ function chooseRole(){
     }
 }
 
-function hideCards(){
+function hideCards(transition = true){
     var playerCount = playerCountInput.value;
     for (let card of playerCards){
-        card.style.opacity = '0';
-        // card.addEventListener('transitionend', function(event) {
-        //     if (event.target === card) {
-        //     //   card.style.display = 'none';
-        //       card.removeEventListener('transitionend', arguments.callee, false);
-        //     }
-        // });
+        hide(card, transition)
     }
     if (!(clicks+1 < playerCount)){
         gameContainer.style.display = 'none';
@@ -208,6 +193,23 @@ function hideCards(){
         newGameBtnContainer.style.display = 'flex';
         document.querySelector('.logo-container').style.display = 'flex'
     }
+}
+
+function hide(element, transition = true){
+    element.style.transition = 'all .3s'
+    element.style.opacity = '0'
+    if (transition){
+        setTimeout(function(){ element.style.display = 'none' }, 300);
+    }
+    else {
+        element.style.display = 'none'
+    }
+}
+
+function show(element){
+    element.style.transition = 'all .3s'
+    element.style.removeProperty('display')
+    setTimeout(function(){ element.style.opacity = '1' }, 0);
 }
 
 function newGame(){

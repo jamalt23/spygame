@@ -12,8 +12,6 @@
     }
     .player-card{
         margin-top: 60px;
-        position: absolute;
-        top: 100%;
     }
     body{
         background-color: black !important;

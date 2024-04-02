@@ -52,14 +52,14 @@ button{
     margin-top: 30px;
 }
 #new-game-btn-container{
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 .game-container{
     margin-top: 40px;
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;

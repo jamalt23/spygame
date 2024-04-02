@@ -42,6 +42,7 @@ const words_rus = [
 ]
 
 const mediaQuery = window.matchMedia('only screen and (max-width: 767px)')
+var logoContainer = document.querySelector('.logo-container')
 var startButton = document.querySelector('#start-btn');
 var playersContainer = document.querySelector('.players-container');
 var playerCountInput = document.querySelector('#players-input');
@@ -109,6 +110,7 @@ if (localStorage.getItem("language") === "ru") {
 else {
     selectLanguage("en")
 }
+hide([gameContainer, newGameBtnContainer], transition = false)
 
 function getRandomInt(min, max) {
     var array = new Uint32Array(1);
@@ -133,19 +135,18 @@ function startGame(playerCount){
     }
     playerCount = parseInt(playerCount);
     if (playerCount > 2 && playerCount < 101) {
-        gameStarted = true;
-        playerCountWrong.style.display = 'none';
-        if (mediaQuery.matches) {
-            document.querySelector('.logo-container').style.display = 'none'
-        }
         console.log('The game started.')
-        playersContainer.style.display = 'none';
-        gameContainer.style.display = 'flex';
+        gameStarted = true;
+        hideCards(transition = false)
+        hide([playerCountWrong, playersContainer])
+        setTimeout(function(){ show(gameContainer) }, 300);
+        if (mediaQuery.matches) {
+            hide(logoContainer)
+        }
         list = ["Spy"]
         for (let i = 1; i < playerCount; i++) {
             list.push(word)
         }
-        hideCards(transition = false)
     }
     else {
         playerCountWrong.style.display = 'inherit';
@@ -184,18 +185,20 @@ function chooseRole(){
 
 function hideCards(transition = true){
     var playerCount = playerCountInput.value;
-    for (let card of playerCards){
-        hide(card, transition)
-    }
-    if (!(clicks+1 < playerCount)){
-        gameContainer.style.display = 'none';
-        playersContainer.style.display = 'none';
-        newGameBtnContainer.style.display = 'flex';
-        document.querySelector('.logo-container').style.display = 'flex'
-    }
+    hide(playerCards, transition)
+    setTimeout(function(){    
+        if (!(clicks+1 < playerCount)){
+            hide([gameContainer, playersContainer])
+            setTimeout(function(){ show([newGameBtnContainer, logoContainer]) }, 300)
+    }}, 300)
 }
 
 function hide(element, transition = true){
+    if (typeof element === 'object') {
+        for (let i = 0; i < element.length; i++) {
+            hide(element[i], transition)
+        }
+    } try {
     element.style.transition = 'all .3s'
     element.style.opacity = '0'
     if (transition){
@@ -203,20 +206,30 @@ function hide(element, transition = true){
     }
     else {
         element.style.display = 'none'
-    }
+    }}
+    catch(err){}
 }
 
-function show(element){
+function show(element, transition = true){
+    if (typeof element === 'object') {
+        for (let i = 0; i < element.length; i++) {
+            show(element[i], transition)
+        }
+    } try {
     element.style.transition = 'all .3s'
     element.style.removeProperty('display')
-    setTimeout(function(){ element.style.opacity = '1' }, 0);
+    if (transition){
+        setTimeout(function(){ element.style.opacity = '1' }, 0)
+    }
+    else {
+        element.style.opacity = '1'
+    }}
+    catch(err){}
 }
 
 function newGame(){
-    startButton.display = "flex"
-    playersContainer.style.display = 'flex';
-    newGameBtnContainer.style.display = 'none';
-    document.querySelector('.logo-container').style.display = 'flex'
+    hide(newGameBtnContainer)
+    setTimeout(function(){ show([startButton, playersContainer, logoContainer]) }, 300);
     spy = "false"
     clicks = -1
     list = ["Spy"]

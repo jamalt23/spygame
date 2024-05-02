@@ -3,6 +3,11 @@ body{
     /* background-color: black !important; */
     background-size: 20%;
 }
+.main{
+    background: linear-gradient(rgba(0, 0, 0, 0.776), rgba(0, 0, 0, 0.776)), url(./images/spy2.jpeg);
+    background-size: 20%;
+    height: 100vh;
+}
 #spy{
     margin-top: 10px;
     color: darkred;
@@ -70,9 +75,7 @@ button{
     width: 200px;
 }
 .player-card{
-    /* position: absolute; */
-    /* top: 0; */
-    margin-top: 20px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -80,6 +83,7 @@ button{
     background-color: rgb(67, 67, 67);
     border-radius: 5px;
     padding: 55px;
+    padding-top: 15px;
     padding-bottom: 40px;
     height: 311px;
     width: 248.390625px;
@@ -138,7 +142,7 @@ button{
 }
 footer{
     background: rgba(0, 0, 0, 0.5);
-    position: absolute;
+    position: inherit;
     top: 93vh;
     bottom: 0;
     left: 0;

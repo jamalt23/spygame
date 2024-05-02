@@ -1,44 +1,51 @@
-const words_eng = [
-    "Apple", "Banana", "Car", "Cat", "House", "Milk", "Sun", "Book", "Key", "Phone",
-    "Cup", "Fire", "Water", "Dog", "Pencil", "Computer", "Ball", "Hat", "Table", "Paint",
-    "Wall", "Pen", "Bed", "Music", "Flower", "Bag", "Sea", "Mirror", "Dress", "Moon",
-    "Clock", "Chair", "Lamp", "Map", "Bear", "Folder", "Salad", "Ticket", "Wheel", "Star",
-    "Box", "Stairs", "Armchair", "Flag", "Oven", "Medal", "Box", "Horse", "Bedroom", "Microphone",
-    "Keychain", "Second", "Kettle", "Mountain", "Man", "Plastic", "Statue", "Bank", "Back", "Meat",
-    "Park", "Turtle", "Gun", "Motorcycle", "Ball", "Balloon", "Suitcase", "Jaw", "Door", "Mushroom",
-    "Planet", "Bomb", "Stool", "Bench", "Sport", "Pool", "Lighthouse", "Cake", "Stove", "Stairs",
-    "Phone", "Spoon", "Mouse", "Stone", "Bun", "Spring", "Grain", "Water", "Arrow", "Fish", "Butterfly",
-    "Snake", "Bucket", "Ship", "Air", "Window", "Shelf", "Onion", "Gate", "Ram", "Sword", "Giraffe",
-    "Crow", "Cover", "Gun", "Crucian", "Elephant", "Zebra", "Old woman", "Gift", "Sled", "Mole", "Corn",
-    "Salad", "Guitar", "Pencil", "Board", "Hat", "Doll", "Sausage", "Weather", "Cup", "Blueberry", "Mouse",
-    "Nut", "Kiss", "Bowl", "Cabbage", "Shadow", "Dragon", "Dress", "Bolt", "Daughter", "Soap", "Sofa",
-    "Jeans", "Language", "Sponge", "Cardboard", "Dumplings", "Brandy", "Mountain", "Palm", "Table",
-    "Scarf", "Mask", "Puddle", "Egg", "Pillow", "Flame", "Chocolate", "Briefcase", "Onion", "Tree", "Plate",
-    "Root", "Lock", "Cell", "Stick", "Hair", "Skull", "Rope", "Cheese", "Chicken", "Goose", "Steam", "Light",
-    "Call", "Horse", "Hail", "Crane", "Wig", "Tooth", "Button", "Suitcase", "Crow", "Plane", "Island", "Bottle",
-    "Secateurs", "Hand", "Knee", "Kitten", "Newspaper", "Dragonfly", "Key", "Wallet", "Glass", "Potato", "Tie",
-    "Wheel", "Heat", "Hood", "Fork", "Jam", "Bouquet", "Pasta", "Mouse", "Floor", "Lilac"
+const words_eng = ["Car", "Watermelon", "Actor", "Angel", "Airport", "Joke", "Certificate", "Bacterium", "Butterfly", "Banana", 
+"Bank", "Sheep", "Baggage", "Pool", "Battery", "Ticket", "Dish", "Bolt", "Bomb", "Bath", 
+"Bouquet", "Bun", "Bottle", "Bucket", "Rope", "Spring", "Fork", "Water", "Air", "Hair", 
+"Crow", "Currency", "Newspaper", "Tie", "Guitar", "Mountain", "Hail", "Mushroom", "Sponge", "Goose", 
+"Garage", "Coffin", "Nest", "Galaxy", "Door", "Tree", "Jam", "Jeans", "Sofa", "House", 
+"Board", "Daughter", "Dragon", "Castle", "Gentleman", "Heat", "Giraffe", "Toad", "Iron", "Magazine", 
+"Gum", "Wife", "Lock", "Star", "Ring", "Zebra", "Mirror", "Seed", "Snake", "Tooth", 
+"Needle", "Fright", "Ingridient", "Drop", "Cabbage", "Hood", "Pencil", "Carp", "Cardboard", "Potato", 
+"Cage", "Key", "Book", "Sausage", "Knee", "Wheel", "Computer", "Horse", "Cognac", "Ship", 
+"Box", "Cat", "Wallet", "Tap", "Paint", "Chair", "Bed", "Mole", "Lid", "Doll", 
+"Corn", "Chicken", "Palm", "Lamp", "Ladder", "Spoon", "Puddle", "Bow", "Shovel", "Moon", 
+"Pilot", "Mask", "Beacon", "Medal", "Bear", "Sword", "Microphone", "Milk", "Sea", "Motorbike", 
+"Music", "Soap", "Mouse", "Meet", "Ball", "Fire", "Window", "Nut", "Island", "Eagle", 
+"Dinner", "Weapon", "Organism", "Wallpaper", "Hotel", "Stick", "Folder", "Steam", "Wig", "Park", 
+"Paste", "Dumplings", "Furnace", "Gun", "Flame", "Planet", "Plastic", "Dress", "Plate", "Weather", 
+"Present", "Pillow", "Floor", "Shelf", "Briefcase", "Kiss", "Cannon", "Hand", "Pen", "Fish", 
+"Slave", "Rocket", "Salad", "Airplane", "Slef", "Light", "Second", "Lilac", "Bench", "Elephant", 
+"Dog", "Sun", "Bedroom", "Backrest", "Sport", "Cup", "Statue", "Wall", "Table", "Dragonfly", 
+"Arrow", "Stool", "Bag", "Cheese", "Telephone", "Shadow", "Cake", "Tractor", "Rag", "Theory", 
+"Pipe", "Toilet", "Flag", "Flamingo", "Flashlight", "Photo", "Fruit", "Fabric", "Phobia", "File", 
+"Flower", "Target", "Chain", "Chick", "Compass", "Center", "Teapot", "Clock", "Human", "Jaw", 
+"Suitcase", "Skull", "Turtle", "Blackberry", "Hat", "Baloon", "Scarf", "Napper", "Chocolate", "Apple", 
+"Tongue", "Egg", "Locker", "Poison", "Berry", "Yacht", "Pit", "Jaguar"
 ]
-const words_rus = [
-    "Яблоко", "Банан", "Автомобиль", "Кот", "Дом", "Молоко", "Солнце", "Книга", "Ключ", "Телефон",
-    "Чашка", "Огонь", "Вода", "Собака", "Карандаш", "Компьютер", "Мяч", "Шляпа", "Стол", "Краска",
-    "Стена", "Ручка", "Кровать", "Музыка", "Цветок", "Сумка", "Море", "Зеркало", "Платье", "Луна",
-    "Часы", "Стул", "Лампа", "Карта", "Медведь", "Папка", "Салат", "Билет", "Колесо", "Звезда",
-    "Ящик", "Лестница", "Кресло", "Флаг", "Печь", "Медаль", "Коробка", "Конь", "Спальня", "Микрофон",
-    "Ключница", "Секунда", "Чайник", "Гора", "Человек", "Пластик", "Статуя", "Банк", "Спинка", "Мясо",
-    "Парк", "Черепаха", "Пистолет", "Мотоцикл", "Мячик", "Шарик", "Чемодан", "Челюсть", "Дверь", "Гриб",
-    "Планета", "Бомба", "Табуретка", "Скамейка", "Спорт", "Бассейн", "Маяк", "Торт", "Плита", "Лестница",
-    "Телефон", "Ложка", "Мышь", "Камень", "Булка", "Весна", "Зерно", "Вода", "Стрела", "Рыба", "Бабочка",
-    "Змея", "Ведро", "Корабль", "Воздух", "Окно", "Полка", "Лук", "Капля", "Ворот", "Баран", "Меч", "Жираф",
-    "Ворона", "Крышка", "Пушка", "Карась", "Слон", "Зебра", "Баба", "Подарок", "Санки", "Крот", "Кукуруза",
-    "Гитара", "Карандаш", "Доска", "Шапка", "Кукла", "Колбаса", "Погода", "Чашка", "Черника", "Мышь",
-    "Орех", "Поцелуй", "Чаша", "Капуста", "Тень", "Дракон", "Платье", "Болт", "Дочь", "Мыло", "Диван", "Джинсы",
-    "Язык", "Губка", "Картон", "Пельмени", "Коньяк", "Гора", "Ладонь", "Стол", "Шарф", "Маска", "Лужа",
-    "Яйцо", "Подушка", "Пламя", "Шоколад", "Портфель", "Лук", "Дерево", "Блюдо", "Корень", "Замок", "Клетка",
-    "Палка", "Волос", "Череп", "Веревка", "Сыр", "Курица", "Гусь", "Пар", "Свет", "Звонок", "Лошадь", "Град",
-    "Кран", "Парик", "Зуб", "Клавиша", "Чемодан", "Ворона", "Самолет", "Остров", "Бутылка", "Секатор", "Рука",
-    "Колено", "Котенок", "Газета", "Стрекоза", "Ключ", "Кошелек", "Стакан", "Картошка", "Галстук", "Колесо",
-    "Жара", "Капюшон", "Вилка", "Джем", "Букет", "Паста", "Мышь", "Пол", "Сирень"
+
+const words_rus = ["Автомобиль", "Арбуз", "Актёр", "Ангел", "Аэропорт", "Анекдот", "Аттестат", "Бактерия", "Бабочка", "Банан", 
+"Банк", "Баран", "Багажник", "Бассейн", "Батарейка", "Билет", "Блюдо", "Болт", "Бомба", "Баня", 
+"Букет", "Булка", "Бутылка", "Ведро", "Веревка", "Весна", "Вилка", "Вода", "Воздух", "Волос", 
+"Ворона", "Валюта", "Газета", "Галстук", "Гитара", "Гора", "Град", "Гриб", "Губка", "Гусь", 
+"Гараж", "Гроб", "Гнездо", "Галактика", "Дверь", "Дерево", "Джем", "Джинсы", "Диван", "Дом", 
+"Доска", "Дочь", "Дракон", "Дворец", "Джентельмен", "Жара", "Жираф", "Жаба", "Железо", "Журнал", 
+"Жвачка", "Жена", "Замóк", "Звезда", "Звонок", "Зебра", "Зеркало", "Зерно", "Змея", "Зуб", 
+"Игла", "Испуг", "Ингридиент", "Капля", "Капуста", "Капюшон", "Карандаш", "Карась", "Картон", "Картошка", 
+"Клетка", "Ключ", "Книга", "Колбаса", "Колено", "Колесо", "Компьютер", "Конь", "Коньяк", "Корабль", 
+"Коробка", "Кот", "Кошелек", "Кран", "Краска", "Кресло", "Кровать", "Крот", "Крышка", "Кукла", 
+"Кукуруза", "Курица", "Ладонь", "Лампа", "Лестница", "Ложка", "Лужа", "Лук", "Лопата", "Луна", 
+"Лётчик", "Маска", "Маяк", "Медаль", "Медведь", "Меч", "Микрофон", "Молоко", "Море", "Мотоцикл", 
+"Музыка", "Мыло", "Мышь", "Мясо", "Мяч", "Огонь", "Окно", "Орех", "Остров", "Орёл", 
+"Обед", "Оружие", "Организм", "Обои", "Отель", "Палка", "Папка", "Пар", "Парик", "Парк", 
+"Паста", "Пельмени", "Печь", "Пистолет", "Пламя", "Планета", "Пластик", "Платье", "Плита", "Погода", 
+"Подарок", "Подушка", "Пол", "Полка", "Портфель", "Поцелуй", "Пушка", "Рука", "Ручка", "Рыба", 
+"Раб", "Ракета", "Салат", "Самолет", "Санки", "Свет", "Секунда", "Сирень", "Скамейка", "Слон", 
+"Собака", "Солнце", "Спальня", "Спинка", "Спорт", "Стакан", "Статуя", "Стена", "Стол", "Стрекоза", 
+"Стрела", "Стул", "Сумка", "Сыр", "Телефон", "Тень", "Торт", "Трактор", "Тряпка", "Теория", 
+"Труба", "Туалет", "Флаг", "Фламинго", "Фонарь", "Фото", "Фрукт", "Фабрика", "Фобия", "Файл", 
+"Цветок", "Цель", "Цепочка", "Цыплёнок", "Циркуль", "Центр", "Чайник", "Часы", "Человек", "Челюсть", 
+"Чемодан", "Череп", "Черепаха", "Черника", "Шапка", "Шарик", "Шарф", "Шляпа", "Шоколад", "Яблоко", 
+"Язык", "Яйцо", "Ящик", "Яд", "Ягода", "Яхта", "Яма", "Ягуар"
 ]
 
 const mediaQuery = window.matchMedia('only screen and (max-width: 767px)')
@@ -46,6 +53,7 @@ var logoContainer = document.querySelector('.logo-container')
 var startButton = document.querySelector('#start-btn');
 var playersContainer = document.querySelector('.players-container');
 var playerCountInput = document.querySelector('#players-input');
+var playerCountLabel = document.querySelector('.players-container label');
 var gameContainer = document.querySelector('.game-container');
 var playerCardGood = document.querySelector('.player-card-good');
 var playerCardBad = document.querySelector('.player-card-bad');
@@ -90,7 +98,11 @@ function selectLanguage(lang) {
         startButton.textContent = "Начать";
         chooseButton.textContent = "Выбрать";
         newGameBtn.textContent = "Новая игра";
-        document.querySelector('.players-container label').textContent = "Введите кол-во игроков:"
+        if (mediaQuery.matches) {
+            playerCountLabel.textContent = "Введите кол-во игроков:"
+        } else {
+            playerCountLabel.textContent = "Введите количество игроков:"
+        }
         document.querySelector('.player-card-bad p').textContent = "Вы"
         document.querySelector('.player-card-bad h1').textContent = "Шпион"
         document.querySelector('.player-card-good p').textContent = "Слово:"
@@ -122,7 +134,7 @@ function getRandomWord(){
     word = words[getRandomInt(1, words.length)];
     wordTag.innerText = word;
     if (word.length >= 8) {
-        wordTag.style.fontSize = "2.5rem"
+        wordTag.style.fontSize = "37px"
     }
     wordIndex = words.indexOf(word)
     return word
@@ -176,10 +188,10 @@ function chooseRole(){
         list.splice(list.indexOf(role), 1);
     }
     else{
-        gameContainer.style.display = 'none';
-        playersContainer.style.display = 'none';
-        newGameBtnContainer.style.display = 'flex';
-        document.querySelector('.logo-container').style.display = 'flex'
+        hide([gameContainer, playersContainer])
+        setTimeout(function(){
+            show([newGameBtnContainer, logoContainer]) 
+        }, 300)
     }
 }
 

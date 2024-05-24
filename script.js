@@ -15,13 +15,20 @@ var newGameBtnContainer = document.querySelector('#new-game-btn-container')
 var newGameBtn = document.querySelector('.btn-new-game');
 var gameStarted = false;
 
-function selectLanguage(lang) {
-    var select = document.getElementById("language-select");
-    var label = document.querySelector(".language-selector label");
+selectLanguage(localStorage.language)
+newGame()
 
-    if (lang === "en") {
-        select.value = 'en'
-        localStorage.setItem("language", "en");
+function selectLanguage(lang) {
+    let select = document.getElementById("language-select");
+    let label = document.querySelector(".language-selector label");
+    if (lang == undefined){
+        lang = 'en';
+    }
+
+    select.value = lang
+    localStorage.language = lang
+
+    if (lang == "en") {
         words = words_eng
         label.textContent = "Select language:";
         playerCountWrong.textContent = "Error: Player count must be between 3 and 100";
@@ -35,13 +42,7 @@ function selectLanguage(lang) {
         for (hideBtn of document.querySelectorAll('.btn-hide')) {
             hideBtn.textContent = "Hide"
         }
-        if (gameStarted){
-            word = words[wordIndex]
-            wordTag.innerText = word
-        }
-    } else if (lang === "ru") {
-        select.value = 'ru'
-        localStorage.setItem("language", "ru");
+    } else if (lang == "ru") {
         words = words_rus
         label.textContent = "Выберите язык:";
         playerCountWrong.textContent = "Ошибка: Количество игроков должно быть между 3 и 100";
@@ -59,47 +60,40 @@ function selectLanguage(lang) {
         for (hideBtn of document.querySelectorAll('.btn-hide')) {
             hideBtn.textContent = "Скрыть"
         }
-        if (gameStarted) {
-            word = words[wordIndex]
-            wordTag.innerText = word
-        }
+    }
+
+    if (gameStarted) {
+        setWord( words[wordIndex] )
     }
 }
 
-if (localStorage.getItem("language") === "ru") {
-    selectLanguage("ru")
-}
-else {
-    selectLanguage("en")
-}
-hide([gameContainer, newGameBtnContainer], transition = false)
-
-function getRandomInt(min, max) {
-    var array = new Uint32Array(1);
+function getRandomItem(list) {
+    let array = new Uint32Array(1);
     window.crypto.getRandomValues(array);
-    return Math.floor(array[0] / (0xffffffff + 1) * (max - min + 1) + min);
+    let randomIndex = array[0] % list.length;
+    return list[randomIndex];
 }
 
-function getRandomWord(){
-    word = words[getRandomInt(1, words.length)];
+function setWord(string){
+    word = string
     wordTag.innerText = word;
     if (word.length >= 8) {
         wordTag.style.fontSize = "37px"
+    } else {
+        wordTag.style.removeProperty('font-size')
     }
     wordIndex = words.indexOf(word)
     return word
 }
 
 function startGame(playerCount){
-    word = getRandomWord()
-    if (spy=="true"){
-        window.location.reload();
-    }
+    setWord(getRandomItem(words))
+    if (spy) { newGame(); return }
     playerCount = parseInt(playerCount);
+    window.playerCount = playerCount
     if (playerCount > 2 && playerCount < 101) {
         console.log('The game started.')
         gameStarted = true;
-        hideCards(transition = false)
         hide([playerCountWrong, playersContainer])
         setTimeout(function(){ show(gameContainer) }, 300);
         if (mediaQuery.matches) {
@@ -111,25 +105,21 @@ function startGame(playerCount){
         }
     }
     else {
-        playerCountWrong.style.display = 'inherit';
+        show(playerCountWrong)
     }
 }
-
-spy = "false"
-clicks = -1
 
 function chooseRole(){
     for (let card of playerCards) {
         card.style.display = 'none';
     }
     clicks += 1
-    var playerCount = playerCountInput.value;
-    var role = list[getRandomInt(0, list.length-1)];
+    var role = getRandomItem(list)
     if (clicks < playerCount){
-        if (role == "Spy" && spy!="true") {
+        if (role == "Spy" && !spy) {
             let card = playerCardBad
             show(card)
-            spy = "true"
+            spy = true
         }
         else {
             let card = playerCardGood
@@ -146,7 +136,6 @@ function chooseRole(){
 }
 
 function hideCards(transition = true){
-    var playerCount = playerCountInput.value;
     hide(playerCards, transition)
     setTimeout(function(){    
         if (!(clicks+1 < playerCount)){
@@ -156,43 +145,39 @@ function hideCards(transition = true){
 }
 
 function hide(element, transition = true){
-    if (typeof element === 'object') {
+    if (element instanceof NodeList || element instanceof Array){
         for (let i = 0; i < element.length; i++) {
             hide(element[i], transition)
-        }
-    } try {
-    element.style.transition = 'all .3s'
+    } return }
     element.style.opacity = '0'
     if (transition){
+        element.style.transition = 'all .3s'
         setTimeout(function(){ element.style.display = 'none' }, 300);
     }
     else {
+        element.style.transition = 'none'
         element.style.display = 'none'
-    }}
-    catch(err){}
+    }
 }
 
 function show(element, transition = true){
-    if (typeof element === 'object') {
+    if (element instanceof NodeList || element instanceof Array){
         for (let i = 0; i < element.length; i++) {
             show(element[i], transition)
-        }
-    } try {
-    element.style.transition = 'all .3s'
+    } return }
+    if (transition){ element.style.transition = 'all .3s' }
+    else { element.style.transition = 'none' }
+    element.style.opacity = '0'
     element.style.removeProperty('display')
-    if (transition){
-        setTimeout(function(){ element.style.opacity = '1' }, 0)
-    }
-    else {
+    setTimeout(function(){
         element.style.opacity = '1'
-    }}
-    catch(err){}
+    }, 0)
 }
 
 function newGame(){
-    hide(newGameBtnContainer)
+    hide([gameContainer, newGameBtnContainer])
     setTimeout(function(){ show([startButton, playersContainer, logoContainer]) }, 300);
-    spy = "false"
+    spy = false
     clicks = -1
     list = ["Spy"]
 }

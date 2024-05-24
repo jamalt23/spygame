@@ -28,19 +28,19 @@
             <p id="player-count-wrong">Error: Player count must be between 3 and 100</p>
         </div>
 
-        <div id="new-game-btn-container">
+        <div id="new-game-btn-container" style="display: none;">
             <button class="btn btn-dark btn-new-game" onclick="newGame()">New Game</button>
         </div>
     
-        <div class="game-container">
+        <div class="game-container" style="display: none;">
             <button class="btn-primary btn choose-button" onclick="chooseRole()">Choose</button>
-            <div class="player-card-good player-card">
+            <div class="player-card-good player-card" style="display: none;">
                 <!-- <h3 class="player-card-turn player-card-text">Player 1</h3> -->
                 <p class="player-card-text">The word is:</p>
                 <h1 class="word"></h1>
                 <button class="btn btn-dark btn-hide" onclick="hideCards()">Hide</button>
             </div>
-            <div class="player-card-bad player-card">
+            <div class="player-card-bad player-card" style="display: none;">
                 <!-- <h3 class="player-card-turn player-card-text">Player 1</h3> -->
                 <p class="player-card-text">You are</p>
                 <h1 class="role" style="font-size: 50px;">Spy</h1>

@@ -111,10 +111,8 @@ button{
     border: solid 1px green;
 }
 #player-count-wrong{
-    display: none;
     color: red;
 }
-
 .language-selector {
     position: absolute;
     display: flex;

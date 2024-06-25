@@ -1,6 +1,8 @@
 const mediaQuery = window.matchMedia('only screen and (max-width: 767px)')
 var logoContainer = document.querySelector('.logo-container')
 var startButton = document.querySelector('#start-btn');
+var langSelect = document.getElementById("language-select");
+var langSelectLabel = document.querySelector(".language-selector label");
 var playersContainer = document.querySelector('.players-container');
 var playerCountInput = document.querySelector('#players-input');
 var playerCountLabel = document.querySelector('.players-container label');
@@ -8,6 +10,7 @@ var gameContainer = document.querySelector('.game-container');
 var playerCardGood = document.querySelector('.player-card-good');
 var playerCardBad = document.querySelector('.player-card-bad');
 var playerCards = document.querySelectorAll('.player-card');
+let hideButtons = document.querySelectorAll('.btn-hide')
 var chooseButton = document.querySelector('.choose-button');
 var playerCountWrong = document.querySelector('#player-count-wrong');
 var wordTag = document.querySelector('.word');
@@ -17,55 +20,6 @@ var gameStarted = false;
 
 selectLanguage(localStorage.language)
 newGame()
-
-function selectLanguage(lang) {
-    let select = document.getElementById("language-select");
-    let label = document.querySelector(".language-selector label");
-    if (lang == undefined){
-        lang = 'en';
-    }
-
-    select.value = lang
-    localStorage.language = lang
-
-    if (lang == "en") {
-        words = words_eng
-        label.textContent = "Select language:";
-        playerCountWrong.textContent = "Error: Player count must be between 3 and 100";
-        startButton.textContent = "Start";
-        chooseButton.textContent = "Choose";
-        newGameBtn.textContent = "New Game";
-        document.querySelector('.players-container label').textContent = "Enter player count:"
-        document.querySelector('.player-card-bad p').textContent = "You are"
-        document.querySelector('.player-card-bad h1').textContent = "Spy"
-        document.querySelector('.player-card-good p').textContent = "The word is:"
-        for (hideBtn of document.querySelectorAll('.btn-hide')) {
-            hideBtn.textContent = "Hide"
-        }
-    } else if (lang == "ru") {
-        words = words_rus
-        label.textContent = "Выберите язык:";
-        playerCountWrong.textContent = "Ошибка: Количество игроков должно быть между 3 и 100";
-        startButton.textContent = "Начать";
-        chooseButton.textContent = "Выбрать";
-        newGameBtn.textContent = "Новая игра";
-        if (mediaQuery.matches) {
-            playerCountLabel.textContent = "Введите кол-во игроков:"
-        } else {
-            playerCountLabel.textContent = "Введите количество игроков:"
-        }
-        document.querySelector('.player-card-bad p').textContent = "Вы"
-        document.querySelector('.player-card-bad h1').textContent = "Шпион"
-        document.querySelector('.player-card-good p').textContent = "Слово:"
-        for (hideBtn of document.querySelectorAll('.btn-hide')) {
-            hideBtn.textContent = "Скрыть"
-        }
-    }
-
-    if (gameStarted) {
-        setWord( words[wordIndex] )
-    }
-}
 
 function getRandomItem(list) {
     let array = new Uint32Array(1);
@@ -128,27 +82,27 @@ function chooseRole(){
         list.splice(list.indexOf(role), 1);
     }
     else{
-        endGame()
+        endChoosing()
     }
 }
 
 function hideCards(transition = true){
     hide(playerCards, transition)
     if (!(clicks+1 < playerCount)){
-        setTimeout(endGame, 300)
+        setTimeout(endChoosing, 300)
     }
 }
 
 function newGame(){
-    hide([gameContainer, newGameBtnContainer, timer.parentElement])
+    hide([gameContainer, newGameBtnContainer, timerContainer])
     setTimeout(()=>{ show([startButton, playersContainer, logoContainer]) }, 300);
     spy = false
     clicks = -1
     list = ["Spy"]
 }
 
-function endGame(){
+function endChoosing(){
     hide([gameContainer, playersContainer])
-    setTimeout(()=>{ show([newGameBtnContainer, logoContainer, timer.parentElement]) }, 300)
+    setTimeout(()=>{ show([newGameBtnContainer, logoContainer, timerContainer]) }, 300)
     startTimer(300)
 }

@@ -23,7 +23,11 @@ function startTimer(seconds, endfunc=()=>{}){
         let now = Math.round(Date.now() / 1000);
         let value = seconds - (now - timerStart)
         setTimerValue(value)
+        if (value>seconds){
+            startTimer(seconds, endfunc)
+        }
         if (value<1){
+            setTimerValue(0)
             clearInterval(timerInterval)
             endfunc()
         }

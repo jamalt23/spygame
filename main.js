@@ -150,5 +150,5 @@ function newGame(){
 function endGame(){
     hide([gameContainer, playersContainer])
     setTimeout(()=>{ show([newGameBtnContainer, logoContainer, timer.parentElement]) }, 300)
-    startTimer(5)
+    startTimer(300)
 }

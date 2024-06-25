@@ -128,56 +128,27 @@ function chooseRole(){
         list.splice(list.indexOf(role), 1);
     }
     else{
-        hide([gameContainer, playersContainer])
-        setTimeout(function(){
-            show([newGameBtnContainer, logoContainer]) 
-        }, 300)
+        endGame()
     }
 }
 
 function hideCards(transition = true){
     hide(playerCards, transition)
-    setTimeout(function(){    
-        if (!(clicks+1 < playerCount)){
-            hide([gameContainer, playersContainer])
-            setTimeout(function(){ show([newGameBtnContainer, logoContainer]) }, 300)
-    }}, 300)
-}
-
-function hide(element, transition = true){
-    if (element instanceof NodeList || element instanceof Array){
-        for (let i = 0; i < element.length; i++) {
-            hide(element[i], transition)
-    } return }
-    element.style.opacity = '0'
-    if (transition){
-        element.style.transition = 'all .3s'
-        setTimeout(function(){ element.style.display = 'none' }, 300);
+    if (!(clicks+1 < playerCount)){
+        setTimeout(endGame, 300)
     }
-    else {
-        element.style.transition = 'none'
-        element.style.display = 'none'
-    }
-}
-
-function show(element, transition = true){
-    if (element instanceof NodeList || element instanceof Array){
-        for (let i = 0; i < element.length; i++) {
-            show(element[i], transition)
-    } return }
-    if (transition){ element.style.transition = 'all .3s' }
-    else { element.style.transition = 'none' }
-    element.style.opacity = '0'
-    element.style.removeProperty('display')
-    setTimeout(function(){
-        element.style.opacity = '1'
-    }, 0)
 }
 
 function newGame(){
-    hide([gameContainer, newGameBtnContainer])
-    setTimeout(function(){ show([startButton, playersContainer, logoContainer]) }, 300);
+    hide([gameContainer, newGameBtnContainer, timer.parentElement])
+    setTimeout(()=>{ show([startButton, playersContainer, logoContainer]) }, 300);
     spy = false
     clicks = -1
     list = ["Spy"]
+}
+
+function endGame(){
+    hide([gameContainer, playersContainer])
+    setTimeout(()=>{ show([newGameBtnContainer, logoContainer, timer.parentElement]) }, 300)
+    startTimer(5)
 }

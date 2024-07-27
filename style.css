@@ -34,12 +34,17 @@ label{
     justify-content: center;
     align-items: center;
 }
-.player-count{
+#players-input{
     font-size: 50px;
     border-radius: 10px;
     border: solid 1px;
     padding: 5px;
     width: 90px;
+}
+#players-input:out-of-range{
+    border-color: red;
+    border-width: 3px;
+    outline: none;
 }
 button{
     border-radius: 10px !important;

@@ -4,12 +4,11 @@ const messagesEN = {
     'startButton': "Start",
     'chooseButton': "Choose",
     'newGameBtn': "New Game",
-    'playerCountLabel': "Enter player count:",
-    'playerCardBad.children[0]': "You are",
-    'playerCardBad.children[1]': "Spy",
-    'playerCardGood.children[0]': "The word is:",
-    'hideButtons[0]': "Hide",
-    'hideButtons[1]': "Hide",
+    'playerCountLabel': "Player count:",
+    'playerCardBad.children("p")': "You are",
+    'playerCardBad.children("h1")': "Spy",
+    'playerCardGood.children("p")': "The word is:",
+    'hideButtons': "Hide",
 }
 const messagesRU = {
     'langSelectLabel': "Выберите язык:",
@@ -17,12 +16,11 @@ const messagesRU = {
     'startButton': "Начать",
     'chooseButton': "Выбрать",
     'newGameBtn': "Новая игра",
-    'playerCountLabel': "Введите количество игроков:",
-    'playerCardBad.children[0]': "Вы",
-    'playerCardBad.children[1]': "Шпион",
-    'playerCardGood.children[0]': "Слово:",
-    'hideButtons[0]': "Скрыть",
-    'hideButtons[1]': "Скрыть",
+    'playerCountLabel': "Количество игроков:",
+    'playerCardBad.children("p")': "Вы",
+    'playerCardBad.children("h1")': "Шпион",
+    'playerCardGood.children("p")': "Слово:",
+    'hideButtons': "Скрыть",
 }
 
 function selectLanguage(lang) {
@@ -30,21 +28,18 @@ function selectLanguage(lang) {
         lang = 'en';
     }
 
-    langSelect.value = lang
+    langSelect.val(lang)
     localStorage.language = lang
 
     if (lang == "en") {
         words = words_eng
         for (let [key, value] of Object.entries(messagesEN)) {
-            eval(key).textContent = value
+            $(eval(key)).text(value)
         }
     } else if (lang == "ru") {
         words = words_rus
         for (let [key, value] of Object.entries(messagesRU)) {
-            eval(key).textContent = value
-        }
-        if (mediaQuery.matches) {
-            playerCountLabel.textContent = "Введите кол-во игроков:"
+            $(eval(key)).text(value)
         }
     }
 

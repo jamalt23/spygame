@@ -6,7 +6,7 @@ body{
 .main{
     background: linear-gradient(rgba(0, 0, 0, 0.776), rgba(0, 0, 0, 0.776)), url(./images/spy2.jpeg);
     background-size: 20%;
-    height: 100vh;
+    height: 100vh !important;
 }
 #spy{
     margin-top: 10px;
@@ -33,18 +33,37 @@ label{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
 }
-#players-input{
+.player-count-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1#player-count{
+    color: white;
     font-size: 50px;
-    border-radius: 10px;
-    border: solid 1px;
-    padding: 5px;
-    width: 90px;
+    margin: 0 10px;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 75px #ff00de;
 }
-#players-input:out-of-range{
-    border-color: red;
-    border-width: 3px;
-    outline: none;
+.arrows{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.arrows button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 30px;
+    color: white;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 75px #ff00de;
+    transition: transform 0.3s;
+}
+.arrows button:hover{
+    transform: scale(1.2);
 }
 button{
     border-radius: 10px !important;
@@ -92,8 +111,6 @@ button{
     padding-bottom: 40px;
     height: 311px;
     width: 248.390625px;
-    transition: all .3s;
-    opacity: 0;
 }
 .player-card-text{
     font-size: 20px;
@@ -124,11 +141,14 @@ button{
     align-items: center;
     justify-content: center;
     margin-top: 50px;
+    user-select: none;
+    -webkit-user-select: none;
 }
 #timer{
     font-size: 100px;
-    color: gray;
-    text-shadow: 2px 2px rgb(51, 51, 51);
+    color: white;
+    text-shadow: 0 0 15px #fff, 0 0 20px red, 0 0 35px red, 0 0 40px red, 0 0 50px red, 0 0 75px red;
+    /* text-shadow: 2px 2px rgb(51, 51, 51); */
 }
 .language-selector {
     position: absolute;
@@ -157,11 +177,6 @@ button{
 }
 footer{
     background: rgba(0, 0, 0, 0.5);
-    position: inherit;
-    top: 93vh;
-    bottom: 0;
-    left: 0;
-    right: 0;
     display: flex;
     text-align: center;
     justify-content: center;

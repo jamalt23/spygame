@@ -3,14 +3,14 @@ var timerContainer = timer.parentElement
 
 function setTimerValue(value){
     let minutes = Math.floor(value/60)
-    value = value - minutes*60
+    let seconds = value - minutes*60
     if (String(minutes).length==1){
         minutes = `0${minutes}`
     }
-    if (String(value).length==1){
-        value = `0${value}`
+    if (String(seconds).length==1){
+        seconds = `0${seconds}`
     }
-    timer.innerHTML = `${minutes}:${value}`
+    timer.innerHTML = `${minutes}:${seconds}`
 }
 
 function startTimer(seconds, endfunc=()=>{}){

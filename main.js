@@ -1,26 +1,24 @@
-const mediaQuery = window.matchMedia('only screen and (max-width: 767px)')
-var logoContainer = document.querySelector('.logo-container')
-var startButton = document.querySelector('#start-btn');
-var langSelect = document.getElementById("language-select");
-var langSelectLabel = document.querySelector(".language-selector label");
-var playersContainer = document.querySelector('.players-container');
-var playerCountInput = document.querySelector('#players-input');
-var playerCountLabel = document.querySelector('.players-container label');
-var gameContainer = document.querySelector('.game-container');
-var playerCardGood = document.querySelector('.player-card-good');
-var playerCardBad = document.querySelector('.player-card-bad');
-var playerCards = document.querySelectorAll('.player-card');
-let hideButtons = document.querySelectorAll('.btn-hide')
-var chooseButton = document.querySelector('.choose-button');
-var playerCountWrong = document.querySelector('#player-count-wrong');
-var wordTag = document.querySelector('.word');
-var newGameBtnContainer = document.querySelector('#new-game-btn-container')
-var newGameBtn = document.querySelector('.btn-new-game');
+const mediaQuery = matchMedia('only screen and (max-width: 767px)')
+var logoContainer = $('.logo-container')
+var startButton = $('#start-btn');
+var langSelect = $("#language-select");
+var langSelectLabel = $(".language-selector label");
+var playersContainer = $('.players-container');
+var playerCountLabel = $('.players-container label');
+var playerCountWrong = $('#player-count-wrong');
+var gameContainer = $('.game-container');
+var playerCardGood = $('.player-card-good');
+var playerCardBad = $('.player-card-bad');
+var playerCards = $('.player-card');
+var hideButtons = $('.btn-hide')
+var chooseButton = $('.choose-button');
+var newGameBtnContainer = $('#new-game-btn-container')
+var newGameBtn = $('.btn-new-game');
 var gameStarted = false;
 
 selectLanguage(localStorage.language)
 newGame()
-
+ 
 function getRandomItem(list) {
     let array = new Uint32Array(1);
     window.crypto.getRandomValues(array);
@@ -28,13 +26,23 @@ function getRandomItem(list) {
     return list[randomIndex];
 }
 
+function changePlayerCount(n, min=3, max=100){
+    let prevPlayerCount = parseInt($('#player-count').text())
+    let newPlayerCount = prevPlayerCount + n
+    if (newPlayerCount >= min && newPlayerCount <= max) {
+        $('#player-count').text(newPlayerCount)
+    } else {
+        $('#player-count').text( min )
+    }
+}
+
 function setWord(string){
     word = string
-    wordTag.innerText = word;
+    $('#word').text(word);
     if (word.length >= 8) {
-        wordTag.style.fontSize = "37px"
+        $('#word').css('font-size', '37px')
     } else {
-        wordTag.style.removeProperty('font-size')
+        $('#word').css('font-size', '50px')
     }
     wordIndex = words.indexOf(word)
     return word
@@ -48,8 +56,8 @@ function startGame(playerCount){
     if (playerCount > 2 && playerCount < 101) {
         console.log('The game started.')
         gameStarted = true;
-        hide([playerCountWrong, playersContainer])
-        setTimeout(function(){ show(gameContainer) }, 300);
+        playerCountWrong.hide()
+        hide(playersContainer, ()=>{show(gameContainer)})
         if (mediaQuery.matches) {
             hide(logoContainer)
         }
@@ -64,20 +72,16 @@ function startGame(playerCount){
 }
 
 function chooseRole(){
-    for (let card of playerCards) {
-        card.style.display = 'none';
-    }
+    hideCards(transition = false)
     clicks += 1
-    var role = getRandomItem(list)
     if (clicks < playerCount){
+        let role = getRandomItem(list)
         if (role == "Spy" && !spy) {
-            let card = playerCardBad
-            show(card)
+            show(playerCardBad)
             spy = true
         }
         else {
-            let card = playerCardGood
-            show(card)
+            show(playerCardGood)
         }
         list.splice(list.indexOf(role), 1);
     }
@@ -87,22 +91,25 @@ function chooseRole(){
 }
 
 function hideCards(transition = true){
-    hide(playerCards, transition)
-    if (!(clicks+1 < playerCount)){
-        setTimeout(endChoosing, 300)
-    }
+    hide(playerCards, ()=>{
+        if (!(clicks+1 < playerCount)){
+            endChoosing()
+        }
+    }, transition)
 }
 
 function newGame(){
-    hide([gameContainer, newGameBtnContainer, timerContainer])
-    setTimeout(()=>{ show([startButton, playersContainer, logoContainer]) }, 300);
+    hide([newGameBtnContainer, timerContainer], complete=()=>{
+    show([startButton, playersContainer, logoContainer]) 
+    })
     spy = false
     clicks = -1
     list = ["Spy"]
 }
 
 function endChoosing(){
-    hide([gameContainer, playersContainer])
-    setTimeout(()=>{ show([newGameBtnContainer, logoContainer, timerContainer]) }, 300)
+    hide(gameContainer, complete=()=>{
+    show([newGameBtnContainer, logoContainer, timerContainer])
+    })
     startTimer(300)
 }

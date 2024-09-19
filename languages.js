@@ -23,6 +23,8 @@ const messagesRU = {
     'hideButtons': "Скрыть",
 }
 
+selectLanguage(localStorage.language)
+
 function selectLanguage(lang) {
     if (!["en", "ru"].includes(lang)){
         lang = 'en';

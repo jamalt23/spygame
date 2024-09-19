@@ -1,34 +1,62 @@
 const mediaQuery = matchMedia('only screen and (max-width: 767px)')
-var logoContainer = $('.logo-container')
-var startButton = $('#start-btn');
-var langSelect = $("#language-select");
-var langSelectLabel = $(".language-selector label");
-var playersContainer = $('.players-container');
-var playerCountLabel = $('.players-container label');
-var playerCountWrong = $('#player-count-wrong');
-var gameContainer = $('.game-container');
-var playerCardGood = $('.player-card-good');
-var playerCardBad = $('.player-card-bad');
-var playerCards = $('.player-card');
-var hideButtons = $('.btn-hide')
-var chooseButton = $('.choose-button');
-var newGameBtnContainer = $('#new-game-btn-container')
-var newGameBtn = $('.btn-new-game');
-var gameStarted = false;
 
-selectLanguage(localStorage.language)
-newGame()
- 
-function getRandomItem(list) {
-    let array = new Uint32Array(1);
-    window.crypto.getRandomValues(array);
-    let randomIndex = array[0] % list.length;
-    return list[randomIndex];
+const logoContainer = $('.logo-container')
+const startButton = $('#start-btn');
+const langSelect = $("#language-select");
+const langSelectLabel = $(".language-selector label");
+const playersContainer = $('.players-container');
+const playerCountLabel = $('.players-container label');
+const playerCountWrong = $('#player-count-wrong');
+const gameContainer = $('.game-container');
+const playerCardGood = $('.player-card-good');
+const playerCardBad = $('.player-card-bad');
+const playerCards = $('.player-card');
+const hideButtons = $('.btn-hide')
+const chooseButton = $('.choose-button');
+const newGameBtnContainer = $('#new-game-btn-container')
+const newGameBtn = $('.btn-new-game');
+
+let gameStarted = false;
+let spy = false;
+let clicks = -1;
+let roles = ["Spy"];
+
+function newGame(){
+    hide([newGameBtnContainer, timerContainer], () => {
+        show([startButton, playersContainer, logoContainer]);
+    })
+    gameStarted = false
+    spy = false
+    clicks = -1
+    roles = ["Spy"]
 }
 
-function changePlayerCount(n, min=3, max=100){
-    let prevPlayerCount = parseInt($('#player-count').text())
-    let newPlayerCount = prevPlayerCount + n
+function getRandomItem(arr) {
+    const array = new Uint32Array(1);
+    window.crypto.getRandomValues(array);
+    const randomIndex = array[0] % arr.length;
+    return arr[randomIndex];
+}
+
+let word;
+let wordIndex;
+function setWord(string){
+    word = string;
+    wordIndex = words.indexOf(word);
+    $('#word').text(word);
+
+    const fontSize = word.length >= 8 ? '37px' : '50px';
+    $('#word').css('font-size', fontSize);
+
+    return word;
+}
+
+const minPlayers = 3;
+const maxPlayers = 100;
+
+function changePlayerCount(n, min=minPlayers, max=maxPlayers) {
+    const prevPlayerCount = parseInt($('#player-count').text())
+    const newPlayerCount = prevPlayerCount + n
     if (newPlayerCount >= min && newPlayerCount <= max) {
         $('#player-count').text(newPlayerCount)
     } else {
@@ -36,46 +64,44 @@ function changePlayerCount(n, min=3, max=100){
     }
 }
 
-function setWord(string){
-    word = string
-    $('#word').text(word);
-    if (word.length >= 8) {
-        $('#word').css('font-size', '37px')
-    } else {
-        $('#word').css('font-size', '50px')
-    }
-    wordIndex = words.indexOf(word)
-    return word
-}
-
-function startGame(playerCount){
+let playerCount;
+function startGame(n){
     setWord(getRandomItem(words))
-    if (spy) { newGame(); return }
-    playerCount = parseInt(playerCount);
-    window.playerCount = playerCount
+
+    if (gameStarted) {
+        newGame();
+        return 
+    }
+
+    playerCount = parseInt(n);
+
     if (playerCount > 2 && playerCount < 101) {
         console.log('The game started.')
         gameStarted = true;
         playerCountWrong.hide()
-        hide(playersContainer, ()=>{show(gameContainer)})
+        hide(playersContainer, () => show(gameContainer))
+
         if (mediaQuery.matches) {
             hide(logoContainer)
         }
-        list = ["Spy"]
+
+        roles = ["Spy"]
         for (let i = 1; i < playerCount; i++) {
-            list.push(word)
+            roles.push(word)
         }
     }
     else {
         show(playerCountWrong)
+        changePlayerCount(minPlayers)
     }
 }
 
 function chooseRole(){
     hideCards(transition = false)
     clicks += 1
+
     if (clicks < playerCount){
-        let role = getRandomItem(list)
+        const role = getRandomItem(roles)
         if (role == "Spy" && !spy) {
             show(playerCardBad)
             spy = true
@@ -83,7 +109,7 @@ function chooseRole(){
         else {
             show(playerCardGood)
         }
-        list.splice(list.indexOf(role), 1);
+        roles.splice(roles.indexOf(role), 1);
     }
     else{
         endChoosing()
@@ -91,25 +117,16 @@ function chooseRole(){
 }
 
 function hideCards(transition = true){
-    hide(playerCards, ()=>{
+    hide(playerCards, () => {
         if (!(clicks+1 < playerCount)){
             endChoosing()
         }
     }, transition)
 }
 
-function newGame(){
-    hide([newGameBtnContainer, timerContainer], complete=()=>{
-    show([startButton, playersContainer, logoContainer]) 
-    })
-    spy = false
-    clicks = -1
-    list = ["Spy"]
-}
-
 function endChoosing(){
-    hide(gameContainer, complete=()=>{
-    show([newGameBtnContainer, logoContainer, timerContainer])
+    hide(gameContainer, () => {
+        show([newGameBtnContainer, logoContainer, timerContainer])
     })
     startTimer(300)
 }

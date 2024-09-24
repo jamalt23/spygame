@@ -1,20 +1,20 @@
 const mediaQuery = matchMedia('only screen and (max-width: 767px)')
 
-const logoContainer = $('.logo-container')
+const logoContainer = $('#logo-container')
 const startButton = $('#start-btn');
-const langSelect = $("#language-select");
-const langSelectLabel = $(".language-selector label");
-const playersContainer = $('.players-container');
-const playerCountLabel = $('.players-container label');
+const langSelect = $('#language-select');
+const langSelectLabel = $('label[for="language-select"]');
+const playersContainer = $('#players-container');
+const playerCountText = $('#player-count-text');
 const playerCountWrong = $('#player-count-wrong');
-const gameContainer = $('.game-container');
-const playerCardGood = $('.player-card-good');
-const playerCardBad = $('.player-card-bad');
+const gameContainer = $('#game-container');
+const playerCardGood = $('#player-card-good');
+const playerCardBad = $('#player-card-bad');
 const playerCards = $('.player-card');
 const hideButtons = $('.btn-hide')
-const chooseButton = $('.choose-button');
+const chooseButton = $('#choose-btn');
 const newGameBtnContainer = $('#new-game-btn-container')
-const newGameBtn = $('.btn-new-game');
+const newGameBtn = $('#new-game-btn');
 
 let gameStarted = false;
 let spy = false;

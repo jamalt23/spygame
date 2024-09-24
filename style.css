@@ -1,45 +1,33 @@
-body{
+body, main{
     background: linear-gradient(rgba(0, 0, 0, 0.776), rgba(0, 0, 0, 0.776)), url(./images/spy2.jpeg);
     /* background-color: black !important; */
     background-size: 20%;
 }
-.main{
-    background: linear-gradient(rgba(0, 0, 0, 0.776), rgba(0, 0, 0, 0.776)), url(./images/spy2.jpeg);
-    background-size: 20%;
+main{
     height: 100vh !important;
 }
-#spy{
-    margin-top: 10px;
-    color: darkred;
-    font-weight: 700;
-}
-.logo-container{
+
+div{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 #logo{
     width: 300px;
     opacity: 50%;
 }
-label{
-    color: white;
-    font-size: 30px;
-    text-align: center;
-}
+
 .players-container{
-    margin-top: 20px;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     user-select: none;
     -webkit-user-select: none;
 }
-.player-count-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+h1#player-count-text{
+    text-align: center;
+    color: white;
+    font-size: 30px;
 }
 h1#player-count{
     color: white;
@@ -47,10 +35,8 @@ h1#player-count{
     margin: 0 10px;
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 75px #ff00de;
 }
+
 .arrows{
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
 }
 .arrows button{
@@ -65,6 +51,7 @@ h1#player-count{
 .arrows button:hover{
     transform: scale(1.2);
 }
+
 button{
     border-radius: 10px !important;
 }
@@ -74,36 +61,26 @@ button{
     width: 140px;
     margin-top: 30px;
 }
-.btn-new-game{
+#new-game-btn{
     font-size: 40px !important;
     padding: 10px !important;
     width: 300px;
     margin-top: 30px;
 }
-#new-game-btn-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.game-container{
+
+#game-container{
     margin-top: 40px;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
-.choose-button{
+#choose-btn{
     font-size: 40px !important;
     padding: 10px;
     width: 200px;
 }
+
 .player-card{
     margin-top: 30px;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: rgb(67, 67, 67);
     border-radius: 5px;
     padding: 55px;
@@ -121,15 +98,14 @@ button{
     color: green;
 }
 .btn-hide{
-    /* position: absolute;
-    top: 640px !important; */
     font-size: 35px !important;
     margin-top: 40px;
 }
-.player-card-bad{
+
+#player-card-bad{
     border: solid 1px red;
 }
-.player-card-good{
+#player-card-good{
     border: solid 1px green;
 }
 #player-count-wrong{
@@ -137,9 +113,6 @@ button{
 }
 
 .timer-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-top: 50px;
     user-select: none;
     -webkit-user-select: none;
@@ -148,18 +121,18 @@ button{
     font-size: 100px;
     color: white;
     text-shadow: 0 0 15px #fff, 0 0 20px red, 0 0 35px red, 0 0 40px red, 0 0 50px red, 0 0 75px red;
-    /* text-shadow: 2px 2px rgb(51, 51, 51); */
 }
+
 .language-selector {
     position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     top: 10px;
     right: 20px;
     text-align: center;
-    /* margin-top: 20px; */
     font-family: Arial, sans-serif;
+}
+.language-selector label{
+    color: white;
+    font-size: 30px;
 }
 
 #language-select {
@@ -175,12 +148,10 @@ button{
 #language-select:focus{
     outline: none;
 }
+
 footer{
     background: rgba(0, 0, 0, 0.5);
-    display: flex;
     text-align: center;
-    justify-content: center;
-    align-items: center;
     color: white;
     font-size: 20px;
     font-family: Arial, sans-serif;

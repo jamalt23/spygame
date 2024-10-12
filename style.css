@@ -4,13 +4,42 @@ body, main{
     background-size: 20%;
 }
 main{
-    height: 100vh !important;
+    min-height: 100vh;
 }
 
 div{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+button{
+    border-radius: 10px !important;
+}
+
+.language-selector {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+.language-selector label{
+    color: white;
+    font-size: 30px;
+}
+
+#language-select {
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    font-size: 20px;
+    margin-left: 10px;
+    appearance: inherit;
+}
+#language-select:focus{
+    outline: none;
 }
 
 #logo{
@@ -52,19 +81,10 @@ h1#player-count{
     transform: scale(1.2);
 }
 
-button{
-    border-radius: 10px !important;
-}
 #start-btn{
     font-size: 30px;
     padding: 10px;
     width: 140px;
-    margin-top: 30px;
-}
-#new-game-btn{
-    font-size: 40px !important;
-    padding: 10px !important;
-    width: 300px;
     margin-top: 30px;
 }
 
@@ -72,6 +92,7 @@ button{
     margin-top: 40px;
     flex-direction: column;
 }
+
 #choose-btn{
     font-size: 40px !important;
     padding: 10px;
@@ -79,22 +100,30 @@ button{
 }
 
 .player-card{
+    flex-direction: column !important;
+    background-color: rgb(67, 67, 67) !important;
+    border-radius: 5px !important;
+    min-height: 311px;
+    width: 248.390625px;
+}
+.player-card{
     margin-top: 30px;
-    flex-direction: column;
-    background-color: rgb(67, 67, 67);
-    border-radius: 5px;
     padding: 55px;
     padding-top: 15px;
     padding-bottom: 40px;
-    height: 311px;
-    width: 248.390625px;
 }
 .player-card-text{
     font-size: 20px;
     color: white;
 }
-.word{
+.role, .word{
     font-size: 50px;
+}
+.role{
+    color: white;
+    text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red, 0 0 20px red, 0 0 35px red, 0 0 40px red, 0 0 50px red, 0 0 75px red;
+}
+.word{
     color: green;
 }
 .btn-hide{
@@ -112,6 +141,13 @@ button{
     color: red;
 }
 
+#new-game-btn{
+    font-size: 40px !important;
+    padding: 10px !important;
+    width: 300px;
+    margin-top: 30px;
+}
+
 .timer-container{
     margin-top: 50px;
     user-select: none;
@@ -121,32 +157,6 @@ button{
     font-size: 100px;
     color: white;
     text-shadow: 0 0 15px #fff, 0 0 20px red, 0 0 35px red, 0 0 40px red, 0 0 50px red, 0 0 75px red;
-}
-
-.language-selector {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
-.language-selector label{
-    color: white;
-    font-size: 30px;
-}
-
-#language-select {
-    cursor: pointer;
-    padding: 7px;
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    border: 1px solid #ccc;
-    font-size: 20px;
-    margin-left: 10px;
-    appearance: inherit;
-}
-#language-select:focus{
-    outline: none;
 }
 
 footer{

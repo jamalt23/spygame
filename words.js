@@ -45,3 +45,18 @@ const words_eng = ["Car", "Watermelon", "Actor", "Angel", "Airport", "Joke", "Ce
 "Target", "Chain", "Chick", "Compass", "Teapot", "Clock", "Human", "Jaw", "Suitcase", "Skull", 
 "Turtle", "Blackberry", "Hat", "Baloon", "Scarf", "Napper", "Chocolate", "Apple", "Tongue", "Egg", 
 "Locker", "Poison", "Berry", "Yacht", "Pit", "Jaguar"]
+
+const $word = $('#word');
+let word;
+let wordIndex;
+
+function setWord(string){
+    word = string;
+    wordIndex = words.indexOf(word);
+    $word.text(word);
+
+    const fontSize = word.length >= 8 ? '37px' : '50px';
+    $word.css('font-size', fontSize);
+
+    return word;
+}

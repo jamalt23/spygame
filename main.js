@@ -22,33 +22,14 @@ let clicks = -1;
 let roles = ["Spy"];
 
 function newGame(){
-    hide([newGameBtnContainer, timerContainer], () => {
+    hide([gameContainer, playerCards, newGameBtnContainer, timerContainer], () => {
         show([startButton, playersContainer, logoContainer]);
     })
+
     gameStarted = false
     spy = false
     clicks = -1
     roles = ["Spy"]
-}
-
-function getRandomItem(arr) {
-    const array = new Uint32Array(1);
-    window.crypto.getRandomValues(array);
-    const randomIndex = array[0] % arr.length;
-    return arr[randomIndex];
-}
-
-let word;
-let wordIndex;
-function setWord(string){
-    word = string;
-    wordIndex = words.indexOf(word);
-    $('#word').text(word);
-
-    const fontSize = word.length >= 8 ? '37px' : '50px';
-    $('#word').css('font-size', fontSize);
-
-    return word;
 }
 
 const minPlayers = 3;
@@ -79,11 +60,8 @@ function startGame(n){
         console.log('The game started.')
         gameStarted = true;
         playerCountWrong.hide()
+        logoContainer.hide()
         hide(playersContainer, () => show(gameContainer))
-
-        if (mediaQuery.matches) {
-            hide(logoContainer)
-        }
 
         roles = ["Spy"]
         for (let i = 1; i < playerCount; i++) {
@@ -126,7 +104,7 @@ function hideCards(transition = true){
 
 function endChoosing(){
     hide(gameContainer, () => {
-        show([newGameBtnContainer, logoContainer, timerContainer])
+        show([newGameBtnContainer, timerContainer]);
     })
     startTimer(300)
 }

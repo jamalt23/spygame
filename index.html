@@ -21,7 +21,7 @@
     </div>
 
     <div id="logo-container">
-        <img id="logo" src="./images/spy.jpeg" alt="">
+        <img onclick="newGame()" id="logo" src="./images/spy.jpeg" alt="">
     </div>
 
     <div id="players-container" class="players-container">
@@ -41,6 +41,23 @@
         <p id="player-count-wrong" style="display: none;">Error: Player count must be between 3 and 100</p>
     </div>
 
+    <div id="game-container" style="display: none;">
+        <button id="choose-btn" class="btn-primary btn" onclick="chooseRole()">Choose</button>
+        
+        <div id="player-card-good" class="player-card" style="display: none;">
+            <p class="player-card-text">The word is:</p>
+            <h1 class="word" id="word"></h1>
+            <button class="btn btn-dark btn-hide" onclick="hideCards()">Hide</button>
+        </div>
+
+        <div id="player-card-bad" class="player-card" style="display: none;">
+            <p class="player-card-text">You are</p>
+            <h1 class="role" style="font-size: 50px;">Spy</h1>
+            <button class="btn btn-dark btn-hide" onclick="hideCards()">Hide</button>
+        </div>
+
+    </div>
+    
     <div id="new-game-btn-container" style="display: none !important;">
         <button id="new-game-btn" class="btn btn-dark" onclick="newGame()">New Game</button>
     </div>
@@ -62,23 +79,6 @@
         </button>
     </div> -->
 
-    <div id="game-container" style="display: none;">
-        <button id="choose-btn" class="btn-primary btn" onclick="chooseRole()">Choose</button>
-        
-        <div id="player-card-good" class="player-card" style="display: none;">
-            <p class="player-card-text">The word is:</p>
-            <h1 class="word role" id="word"></h1>
-            <button class="btn btn-dark btn-hide" onclick="hideCards()">Hide</button>
-        </div>
-
-        <div id="player-card-bad" class="player-card" style="display: none;">
-            <p class="player-card-text">You are</p>
-            <h1 class="role" style="font-size: 50px;">Spy</h1>
-            <button class="btn btn-dark btn-hide" onclick="hideCards()">Hide</button>
-        </div>
-
-    </div>
-
 </main>
 
 <footer class="footer">
@@ -97,12 +97,12 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-<script src="./hide-show.js"></script>
+<script src="./util.js"></script>
 <script src="./timer.js"></script>
 <script src="./words.js"></script>
 <script src="./main.js"></script>
-<script src="./hints.js"></script>
 <script src="./languages.js"></script>
+<script src="./hints.js"></script>
 
 </body>
 </html>

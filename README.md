@@ -10,7 +10,7 @@ When the game starts, one player clicks on the `Choose` button while others don'
 <br>When all players have clicked the button, one of them is the Spy so he doesn't know the word.
 
 Players can ask each other about the word, to figure out who is the Spy.
-<br>**Note: those must be a yes-or-no questions**
+<br>**Note: those must be yes/no questions**
 
 When they figure out who is the Spy, they can vote.
 <br>If they were right then the Spy loses. Otherwise, he wins.

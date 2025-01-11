@@ -1,51 +1,63 @@
-const messagesEN = {
-    'langSelectLabel': "Select language:",
-    'playerCountWrong': "Error: Player count must be between 3 and 100",
-    'startButton': "Start",
-    'chooseButton': "Choose",
-    'newGameBtn': "New Game",
-    'playerCountText': "Player count:",
-    'playerCardBad.children("p")': "You are",
-    'playerCardBad.children("h1")': "Spy",
-    'playerCardGood.children("p")': "The word is:",
-    'hideButtons': "Hide",
-}
-const messagesRU = {
-    'langSelectLabel': "Выберите язык:",
-    'playerCountWrong': "Ошибка: Количество игроков должно быть между 3 и 100",
-    'startButton': "Начать",
-    'chooseButton': "Выбрать",
-    'newGameBtn': "Новая игра",
-    'playerCountText': "Количество игроков:",
-    'playerCardBad.children("p")': "Вы",
-    'playerCardBad.children("h1")': "Шпион",
-    'playerCardGood.children("p")': "Слово:",
-    'hideButtons': "Скрыть",
-}
+const languages = {
+    en: {
+        words: wordsEN,
+        translations: {
+            '#languageSelector h2': "Select language:",
+            '#player-count-wrong': `Error: Player count must be between ${MIN_PLAYERS} and ${MIN_PLAYERS}`,
+            '#start-btn': "Start",
+            '#choose-btn': "Choose",
+            '#new-game-btn': "New Game",
+            '#player-count-text': "Player count:",
+            '#player-card-bad h6': "You are",
+            '#spy': "Spy",
+            '#player-card-good h6': "The word is:",
+            '.btn-hide': "Hide",
+        },
+    },
+    ru: {
+        words: wordsRU,
+        translations: {
+            '#languageSelector h2': "Выберите язык:",
+            '#player-count-wrong': `Ошибка: Количество игроков должно быть между ${MIN_PLAYERS} и ${MAX_PLAYERS}`,
+            '#start-btn': "Начать",
+            '#choose-btn': "Выбрать",
+            '#new-game-btn': "Новая игра",
+            '#player-count-text': "Количество игроков:",
+            '#player-card-bad h6': "Вы",
+            '#spy': "Шпион",
+            '#player-card-good h6': "Слово:",
+            '.btn-hide': "Скрыть",
+        },
+    },
+};
+const $langSelect = $('#language-select');
 
-selectLanguage(localStorage.language)
+selectLanguage(localStorage.language);
+
+$langSelect.on('change', function(){
+    const newLang = this.value;
+    if (newLang !== localStorage.language) {
+        selectLanguage(newLang);
+    }
+})
 
 function selectLanguage(lang) {
-    if (!["en", "ru"].includes(lang)){
+    if (!Object.keys(languages).includes(lang)){
+        console.warn(`Invalid language code: ${lang}. Defaulting to English.`);
         lang = 'en';
     }
 
-    langSelect.val(lang)
-    localStorage.language = lang
+    $('html').prop('lang', lang);
+    $langSelect.val(lang);
+    localStorage.language = lang;
 
-    if (lang == "en") {
-        words = words_eng
-        for (let [key, value] of Object.entries(messagesEN)) {
-            $(eval(key)).text(value)
-        }
-    } else if (lang == "ru") {
-        words = words_rus
-        for (let [key, value] of Object.entries(messagesRU)) {
-            $(eval(key)).text(value)
-        }
+    const { words, translations } = languages[lang];
+
+    for (const [key, value] of Object.entries(translations)) {
+        $(key).text(value);
     }
 
     if (gameStarted) {
-        setWord( words[wordIndex] )
+        setWord(words[wordIndex]);
     }
 }

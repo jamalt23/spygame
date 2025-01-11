@@ -1,110 +1,105 @@
-const mediaQuery = matchMedia('only screen and (max-width: 767px)')
-
-const logoContainer = $('#logo-container')
-const startButton = $('#start-btn');
-const langSelect = $('#language-select');
-const langSelectLabel = $('label[for="language-select"]');
-const playersContainer = $('#players-container');
-const playerCountText = $('#player-count-text');
-const playerCountWrong = $('#player-count-wrong');
-const gameContainer = $('#game-container');
-const playerCardGood = $('#player-card-good');
-const playerCardBad = $('#player-card-bad');
-const playerCards = $('.player-card');
-const hideButtons = $('.btn-hide')
-const chooseButton = $('#choose-btn');
-const newGameBtnContainer = $('#new-game-btn-container')
-const newGameBtn = $('#new-game-btn');
+const $logo = $('#logo');
+const $gameSetup = $('#game-setup');
+const $playerCount = $('#player-count');
+const $playerCountError = $('#player-count-error');
+const $gameContainer = $('#game-container');
+const $playerCards = $('.player-card');
+const $playerCardGood = $('#player-card-good');
+const $playerCardBad = $('#player-card-bad');
+const $newGameBtn = $('#new-game-btn');
 
 let gameStarted = false;
-let spy = false;
-let clicks = -1;
-let roles = ["Spy"];
+let currentPlayerIndex = -1;
+let roles = {
+    spy: 1,
+    player: 0
+};
 
-function newGame(){
-    hide([gameContainer, playerCards, newGameBtnContainer, timerContainer], () => {
-        show([startButton, playersContainer, logoContainer]);
+$newGameBtn.add($logo).on('click', newGame)
+function newGame() {
+    hide([$gameContainer, $playerCards, $timer, $newGameBtn], () => {
+        show([$gameSetup, $logo]);
     })
-
-    gameStarted = false
-    spy = false
-    clicks = -1
-    roles = ["Spy"]
+    gameStarted = false;
+    currentPlayerIndex = -1;
+    roles = {
+        spy: 1,
+        player: 0
+    };
 }
 
-const minPlayers = 3;
-const maxPlayers = 100;
+const MIN_PLAYERS = 3;
+const MAX_PLAYERS = 100;
+const isValidPlayerCount = count => count >= MIN_PLAYERS && count <= MAX_PLAYERS;
 
-function changePlayerCount(n, min=minPlayers, max=maxPlayers) {
-    const prevPlayerCount = parseInt($('#player-count').text())
-    const newPlayerCount = prevPlayerCount + n
-    if (newPlayerCount >= min && newPlayerCount <= max) {
-        $('#player-count').text(newPlayerCount)
+function changePlayerCount(n) {
+    const prevPlayerCount = parseInt($playerCount.text());
+    const newPlayerCount = prevPlayerCount + n;
+    if (isValidPlayerCount(newPlayerCount)) {
+        $playerCount.text(newPlayerCount);
     } else {
-        $('#player-count').text( min )
+        $playerCount.text(MIN_PLAYERS);
     }
 }
 
 let playerCount;
-function startGame(n){
-    setWord(getRandomItem(words))
+$('#start-btn').on('click', () => {
+    setWord(getRandomItem(words));
 
     if (gameStarted) {
         newGame();
-        return 
+        return;
     }
 
-    playerCount = parseInt(n);
+    playerCount = parseInt($playerCount.text());
 
-    if (playerCount > 2 && playerCount < 101) {
-        console.log('The game started.')
+    if (isValidPlayerCount(playerCount)) {
+        console.log('The game started.');
+        roles.player = playerCount - roles.spy;
         gameStarted = true;
-        playerCountWrong.hide()
-        logoContainer.hide()
-        hide(playersContainer, () => show(gameContainer))
-
-        roles = ["Spy"]
-        for (let i = 1; i < playerCount; i++) {
-            roles.push(word)
-        }
+        $playerCountError.hide();
+        hide([$logo, $gameSetup], () => show($gameContainer));
     }
     else {
-        show(playerCountWrong)
-        changePlayerCount(minPlayers)
+        show($playerCountError);
+        changePlayerCount(MIN_PLAYERS);
     }
-}
+})
 
-function chooseRole(){
-    hideCards(transition = false)
-    clicks += 1
+$('#choose-btn').on('click',  () => {
+    $playerCards.hide();
+    currentPlayerIndex += 1;
 
-    if (clicks < playerCount){
-        const role = getRandomItem(roles)
-        if (role == "Spy" && !spy) {
-            show(playerCardBad)
-            spy = true
+    if (currentPlayerIndex < playerCount) {
+        const role = getRandomItem(Object.keys(roles));
+
+        if (role === 'spy') {
+            show($playerCardBad);
+        } else {
+            show($playerCardGood);
         }
-        else {
-            show(playerCardGood)
-        }
-        roles.splice(roles.indexOf(role), 1);
-    }
-    else{
-        endChoosing()
-    }
-}
 
-function hideCards(transition = true){
-    hide(playerCards, () => {
-        if (!(clicks+1 < playerCount)){
-            endChoosing()
+        roles[role] -= 1;
+        if (roles[role] === 0) {
+            delete roles[role];
+        }
+    } else {
+        endChoosing();
+    }
+})
+
+$('.btn-hide').on('click', hideCards);
+function hideCards(transition = true) {
+    hide($playerCards, () => {
+        if (!(currentPlayerIndex+1 < playerCount)){
+            endChoosing();
         }
     }, transition)
 }
 
 function endChoosing(){
-    hide(gameContainer, () => {
-        show([newGameBtnContainer, timerContainer]);
+    hide($gameContainer, () => {
+        show([$logo, $newGameBtn, $timer]);
     })
-    startTimer(300)
+    startTimer(300);
 }

@@ -1,4 +1,4 @@
-const words_rus = ["Автомобиль", "Арбуз", "Актёр", "Ангел", "Аэропорт", "Анекдот", "Аттестат", "Бактерия", "Бабочка", "Банан", 
+const wordsRU = ["Автомобиль", "Арбуз", "Актёр", "Ангел", "Аэропорт", "Анекдот", "Аттестат", "Бактерия", "Бабочка", "Банан", 
 "Банк", "Баран", "Багажник", "Бассейн", "Батарейка", "Билет", "Блюдо", "Болт", "Бомба", "Баня", 
 "Букет", "Булка", "Бутылка", "Ведро", "Веревка", "Весна", "Вилка", "Вода", "Воздух", "Волос", 
 "Ворона", "Валюта", "Газета", "Галстук", "Гитара", "Гора", "Град", "Гриб", "Губка", "Гусь", 
@@ -20,9 +20,9 @@ const words_rus = ["Автомобиль", "Арбуз", "Актёр", "Анге
 "Туалет", "Флаг", "Фламинго", "Фонарь", "Фото", "Фрукт", "Фабрика", "Фобия", "Файл", "Цветок", 
 "Цель", "Цепочка", "Цыплёнок", "Циркуль", "Чайник", "Часы", "Человек", "Челюсть", "Чемодан", "Череп", 
 "Черепаха", "Черника", "Шапка", "Шарик", "Шарф", "Шляпа", "Шоколад", "Яблоко", "Язык", "Яйцо", 
-"Ящик", "Яд", "Ягода", "Яхта", "Яма", "Ягуар"]
+"Ящик", "Яд", "Ягода", "Яхта", "Яма", "Ягуар"];
 
-const words_eng = ["Car", "Watermelon", "Actor", "Angel", "Airport", "Joke", "Certificate", "Bacterium", "Butterfly", "Banana", 
+const wordsEN = ["Car", "Watermelon", "Actor", "Angel", "Airport", "Joke", "Certificate", "Bacterium", "Butterfly", "Banana", 
 "Bank", "Sheep", "Baggage", "Pool", "Battery", "Ticket", "Dish", "Bolt", "Bomb", "Bath", 
 "Bouquet", "Bun", "Bottle", "Bucket", "Rope", "Spring", "Fork", "Water", "Air", "Hair", 
 "Crow", "Currency", "Newspaper", "Tie", "Guitar", "Mountain", "Hail", "Mushroom", "Sponge", "Goose", 
@@ -44,19 +44,16 @@ const words_eng = ["Car", "Watermelon", "Actor", "Angel", "Airport", "Joke", "Ce
 "Toilet", "Flag", "Flamingo", "Flashlight", "Photo", "Fruit", "Fabric", "Phobia", "File", "Flower", 
 "Target", "Chain", "Chick", "Compass", "Teapot", "Clock", "Human", "Jaw", "Suitcase", "Skull", 
 "Turtle", "Blackberry", "Hat", "Baloon", "Scarf", "Napper", "Chocolate", "Apple", "Tongue", "Egg", 
-"Locker", "Poison", "Berry", "Yacht", "Pit", "Jaguar"]
+"Locker", "Poison", "Berry", "Yacht", "Pit", "Jaguar"];
 
 const $word = $('#word');
 let word;
 let wordIndex;
+let words = wordsEN;
 
 function setWord(string){
     word = string;
     wordIndex = words.indexOf(word);
     $word.text(word);
-
-    const fontSize = word.length >= 8 ? '37px' : '50px';
-    $word.css('font-size', fontSize);
-
     return word;
 }

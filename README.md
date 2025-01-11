@@ -38,7 +38,7 @@ Obviously, it is impossible to fit a whole planet in a pocket, so other players 
 Words array
 ----------
 ```JavaScript
-const words_eng = ["Car", "Watermelon", "Actor", "Angel", "Airport", "Joke", "Certificate", "Bacterium", "Butterfly", "Banana", 
+const wordsEN = ["Car", "Watermelon", "Actor", "Angel", "Airport", "Joke", "Certificate", "Bacterium", "Butterfly", "Banana", 
 "Bank", "Sheep", "Baggage", "Pool", "Battery", "Ticket", "Dish", "Bolt", "Bomb", "Bath", 
 "Bouquet", "Bun", "Bottle", "Bucket", "Rope", "Spring", "Fork", "Water", "Air", "Hair", 
 "Crow", "Currency", "Newspaper", "Tie", "Guitar", "Mountain", "Hail", "Mushroom", "Sponge", "Goose", 
@@ -63,7 +63,7 @@ const words_eng = ["Car", "Watermelon", "Actor", "Angel", "Airport", "Joke", "Ce
 "Locker", "Poison", "Berry", "Yacht", "Pit", "Jaguar"]
 ```
 ```JavaScript
-const words_rus = ["Автомобиль", "Арбуз", "Актёр", "Ангел", "Аэропорт", "Анекдот", "Аттестат", "Бактерия", "Бабочка", "Банан", 
+const wordsRU = ["Автомобиль", "Арбуз", "Актёр", "Ангел", "Аэропорт", "Анекдот", "Аттестат", "Бактерия", "Бабочка", "Банан", 
 "Банк", "Баран", "Багажник", "Бассейн", "Батарейка", "Билет", "Блюдо", "Болт", "Бомба", "Баня", 
 "Букет", "Булка", "Бутылка", "Ведро", "Веревка", "Весна", "Вилка", "Вода", "Воздух", "Волос", 
 "Ворона", "Валюта", "Газета", "Галстук", "Гитара", "Гора", "Град", "Гриб", "Губка", "Гусь", 

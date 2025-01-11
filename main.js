@@ -32,6 +32,16 @@ const MIN_PLAYERS = 3;
 const MAX_PLAYERS = 100;
 const isValidPlayerCount = count => count >= MIN_PLAYERS && count <= MAX_PLAYERS;
 
+$playerCount.on('keydown', (e) => {
+    const playerCountText = $playerCount.text()
+    if (e.key === 'Backspace' && playerCountText.length > 1) {
+        return true;
+    }
+    if (!(/\d/.test(e.key) && isValidPlayerCount(playerCountText + e.key))) {
+        return false;
+    }
+})
+
 function changePlayerCount(n) {
     const prevPlayerCount = parseInt($playerCount.text());
     const newPlayerCount = prevPlayerCount + n;

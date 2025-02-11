@@ -3,11 +3,11 @@ const $timer = $('#timer');
 function setTimerValue(value){
     let minutes = String(Math.floor(value/60));
     let seconds = String(value - minutes*60);
-    if (minutes.length === 1) {
+    if (minutes.length == 1) {
         minutes = '0' + minutes;
     }
-    if (seconds.length === 1) {
-        seconds = '0' + minutes;
+    if (seconds.length == 1) {
+        seconds = '0' + seconds;
     }
     $timer.html(`${minutes}:${seconds}`);
 }

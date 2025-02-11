@@ -12,35 +12,35 @@ let gameStarted = false;
 let currentPlayerIndex = -1;
 let roles = {
     spy: 1,
-    player: 0
+    player: 0,
 };
 
-$newGameBtn.add($logo).on('click', newGame)
+$newGameBtn.add($logo).on('click', newGame);
 function newGame() {
     hide([$gameContainer, $playerCards, $timer, $newGameBtn], () => {
         show([$gameSetup, $logo]);
-    })
+    });
     gameStarted = false;
     currentPlayerIndex = -1;
     roles = {
         spy: 1,
-        player: 0
+        player: 0,
     };
 }
 
 const MIN_PLAYERS = 3;
 const MAX_PLAYERS = 100;
-const isValidPlayerCount = count => count >= MIN_PLAYERS && count <= MAX_PLAYERS;
+const isValidPlayerCount = (count) => count >= MIN_PLAYERS && count <= MAX_PLAYERS;
 
 $playerCount.on('keydown', (e) => {
-    const playerCountText = $playerCount.text()
+    const playerCountText = $playerCount.text();
     if (e.key === 'Backspace' && playerCountText.length > 1) {
         return true;
     }
     if (!(/\d/.test(e.key) && isValidPlayerCount(playerCountText + e.key))) {
         return false;
     }
-})
+});
 
 function changePlayerCount(n) {
     const prevPlayerCount = parseInt($playerCount.text());
@@ -69,14 +69,13 @@ $('#start-btn').on('click', () => {
         gameStarted = true;
         $playerCountError.hide();
         hide([$logo, $gameSetup], () => show($gameContainer));
-    }
-    else {
+    } else {
         show($playerCountError);
         changePlayerCount(MIN_PLAYERS);
     }
-})
+});
 
-$('#choose-btn').on('click',  () => {
+$('#choose-btn').on('click', () => {
     $playerCards.hide();
     currentPlayerIndex += 1;
 
@@ -96,20 +95,24 @@ $('#choose-btn').on('click',  () => {
     } else {
         endChoosing();
     }
-})
+});
 
 $('.btn-hide').on('click', hideCards);
 function hideCards(transition = true) {
-    hide($playerCards, () => {
-        if (!(currentPlayerIndex+1 < playerCount)){
-            endChoosing();
-        }
-    }, transition)
+    hide(
+        $playerCards,
+        () => {
+            if (!(currentPlayerIndex + 1 < playerCount)) {
+                endChoosing();
+            }
+        },
+        transition
+    );
 }
 
-function endChoosing(){
+function endChoosing() {
     hide($gameContainer, () => {
         show([$logo, $newGameBtn, $timer]);
-    })
+    });
     startTimer(300);
 }

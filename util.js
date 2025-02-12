@@ -1,40 +1,42 @@
-function hide(elements, complete = ()=>{}, transition = true){
-    if (elements instanceof Array){
-        const array = elements ; elements = $();
-        array.forEach(element => {
+function hide(elements, complete = () => {}, transition = true) {
+    if (elements instanceof Array) {
+        const array = elements;
+        elements = $();
+        array.forEach((element) => {
             element = $(element);
             element.each((index, element) => {
                 const $element = $(element);
                 if ($element.is(':visible')) {
                     $.merge(elements, $element);
                 }
-            })
-        })
+            });
+        });
     }
-    if (transition){
+    if (transition) {
         $(elements).fadeOut(250, 'linear', complete);
     } else {
-        $(elements).hide(0, complete = complete);
+        $(elements).hide(0, (complete = complete));
     }
 }
 
-function show(elements, complete = ()=>{}, transition = true){
-    if (elements instanceof Array){
-        const array = elements ; elements = $();
-        array.forEach(element => {
+function show(elements, complete = () => {}, transition = true) {
+    if (elements instanceof Array) {
+        const array = elements;
+        elements = $();
+        array.forEach((element) => {
             element = $(element);
             element.each((index, element) => {
                 const $element = $(element);
                 if ($element.is(':hidden')) {
                     $.merge(elements, $element);
                 }
-            })
-        })
+            });
+        });
     }
-    if (transition){
+    if (transition) {
         $(elements).fadeIn(250, 'linear', complete);
     } else {
-        $(elements).show(0, complete = complete);
+        $(elements).show(0, (complete = complete));
     }
 }
 

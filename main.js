@@ -106,7 +106,7 @@ function hideCards(transition = true) {
                 endChoosing();
             }
         },
-        transition
+        transition,
     );
 }
 

@@ -28,62 +28,63 @@ The first player clicks the `Choose` button and sees the word "Planet". Then he 
 
 Then they start to ask each other questions.
 <br>For example, player 1 asks player 2: "Is it an animal?"
-<br>Player 2 answers "No". 
+<br>Player 2 answers "No".
 <br>Then player 2 asks player 3: "Is it possible to put this item in a pocket?"
 <br>Player 3 answers "Yes".
 
 Obviously, it is impossible to fit a whole planet in a pocket, so other players figure out that player 3 doesn't know the word and he is the Spy.
 <br>They vote that he is the Spy, and he loses.
 
-Words array
-----------
+## Words array
+
 ```JavaScript
-const wordsEN = ["Car", "Watermelon", "Actor", "Angel", "Airport", "Joke", "Certificate", "Bacterium", "Butterfly", "Banana", 
-"Bank", "Sheep", "Baggage", "Pool", "Battery", "Ticket", "Dish", "Bolt", "Bomb", "Bath", 
-"Bouquet", "Bun", "Bottle", "Bucket", "Rope", "Spring", "Fork", "Water", "Air", "Hair", 
-"Crow", "Currency", "Newspaper", "Tie", "Guitar", "Mountain", "Hail", "Mushroom", "Sponge", "Goose", 
-"Garage", "Coffin", "Nest", "Galaxy", "Door", "Tree", "Jam", "Jeans", "Sofa", "House", 
-"Board", "Daughter", "Dragon", "Castle", "Gentleman", "Heat", "Giraffe", "Toad", "Iron", "Magazine", 
-"Gum", "Wife", "Lock", "Star", "Ring", "Zebra", "Mirror", "Seed", "Snake", "Tooth", 
-"Needle", "Fright", "Drop", "Cabbage", "Hood", "Pencil", "Carp", "Cardboard", "Potato", 
-"Cage", "Key", "Book", "Sausage", "Knee", "Wheel", "Computer", "Horse", "Cognac", "Ship", 
-"Box", "Cat", "Wallet", "Tap", "Paint", "Chair", "Bed", "Mole", "Lid", "Doll", 
-"Corn", "Chicken", "Palm", "Lamp", "Ladder", "Spoon", "Puddle", "Shovel", "Moon", "Pilot", 
-"Mask", "Beacon", "Medal", "Bear", "Sword", "Microphone", "Milk", "Sea", "Motorbike", "Music", 
-"Soap", "Mouse", "Meet", "Ball", "Fire", "Window", "Nut", "Island", "Eagle", "Dinner", 
-"Weapon", "Organism", "Wallpaper", "Hotel", "Stick", "Folder", "Steam", "Wig", "Park", "Paste", 
-"Dumplings", "Furnace", "Gun", "Flame", "Planet", "Plastic", "Dress", "Plate", "Weather", "Present", 
-"Pillow", "Floor", "Shelf", "Briefcase", "Kiss", "Cannon", "Hand", "Pen", "Fish", "Slave", 
-"Rocket", "Salad", "Airplane", "Slef", "Light", "Second", "Lilac", "Bench", "Elephant", "Dog", 
-"Sun", "Bedroom", "Backrest", "Sport", "Cup", "Statue", "Wall", "Table", "Dragonfly", "Arrow", 
-"Stool", "Bag", "Cheese", "Telephone", "Shadow", "Cake", "Tractor", "Rag", "Theory", "Pipe", 
-"Toilet", "Flag", "Flamingo", "Flashlight", "Photo", "Fruit", "Fabric", "Phobia", "File", "Flower", 
-"Target", "Chain", "Chick", "Compass", "Teapot", "Clock", "Human", "Jaw", "Suitcase", "Skull", 
-"Turtle", "Blackberry", "Hat", "Baloon", "Scarf", "Napper", "Chocolate", "Apple", "Tongue", "Egg", 
-"Locker", "Poison", "Berry", "Yacht", "Pit", "Jaguar"]
+const wordsEN = ["Car", "Watermelon", "Actor", "Angel", "Airport", "Joke", "Certificate", "Bacterium", "Butterfly", "Banana",
+"Bank", "Sheep", "Baggage", "Pool", "Battery", "Ticket", "Dish", "Bolt", "Bomb", "Bath",
+"Bouquet", "Bun", "Bottle", "Bucket", "Rope", "Spring", "Fork", "Water", "Air", "Hair",
+"Crow", "Currency", "Newspaper", "Tie", "Guitar", "Mountain", "Hail", "Mushroom", "Sponge", "Goose",
+"Garage", "Coffin", "Nest", "Galaxy", "Door", "Tree", "Jam", "Jeans", "Sofa", "House",
+"Board", "Daughter", "Dragon", "Castle", "Gentleman", "Heat", "Giraffe", "Toad", "Iron", "Magazine",
+"Gum", "Wife", "Lock", "Star", "Ring", "Zebra", "Mirror", "Seed", "Snake", "Tooth",
+"Needle", "Fright", "Drop", "Cabbage", "Hood", "Pencil", "Carp", "Cardboard", "Potato",
+"Cage", "Key", "Book", "Sausage", "Knee", "Wheel", "Computer", "Horse", "Cognac", "Ship",
+"Box", "Cat", "Wallet", "Tap", "Paint", "Chair", "Bed", "Mole", "Lid", "Doll",
+"Corn", "Chicken", "Palm", "Lamp", "Ladder", "Spoon", "Puddle", "Shovel", "Moon", "Pilot",
+"Mask", "Beacon", "Medal", "Bear", "Sword", "Microphone", "Milk", "Sea", "Motorbike", "Music",
+"Soap", "Mouse", "Meet", "Ball", "Fire", "Window", "Nut", "Island", "Eagle", "Dinner",
+"Weapon", "Organism", "Wallpaper", "Hotel", "Stick", "Folder", "Steam", "Wig", "Park", "Paste",
+"Dumplings", "Furnace", "Gun", "Flame", "Planet", "Plastic", "Dress", "Plate", "Weather", "Present",
+"Pillow", "Floor", "Shelf", "Briefcase", "Kiss", "Cannon", "Hand", "Pen", "Fish", "Slave",
+"Rocket", "Salad", "Airplane", "Slef", "Light", "Second", "Lilac", "Bench", "Elephant", "Dog",
+"Sun", "Bedroom", "Backrest", "Sport", "Cup", "Statue", "Wall", "Table", "Dragonfly", "Arrow",
+"Stool", "Bag", "Cheese", "Telephone", "Shadow", "Cake", "Tractor", "Rag", "Theory", "Pipe",
+"Toilet", "Flag", "Flamingo", "Flashlight", "Photo", "Fruit", "Fabric", "Phobia", "File", "Flower",
+"Target", "Chain", "Chick", "Compass", "Teapot", "Clock", "Human", "Jaw", "Suitcase", "Skull",
+"Turtle", "Blackberry", "Hat", "Baloon", "Scarf", "Napper", "Chocolate", "Apple", "Tongue", "Egg",
+"Locker", "Poison", "Berry", "Yacht", "Pit", "Jaguar"];
 ```
+
 ```JavaScript
-const wordsRU = ["Автомобиль", "Арбуз", "Актёр", "Ангел", "Аэропорт", "Анекдот", "Аттестат", "Бактерия", "Бабочка", "Банан", 
-"Банк", "Баран", "Багажник", "Бассейн", "Батарейка", "Билет", "Блюдо", "Болт", "Бомба", "Баня", 
-"Букет", "Булка", "Бутылка", "Ведро", "Веревка", "Весна", "Вилка", "Вода", "Воздух", "Волос", 
-"Ворона", "Валюта", "Газета", "Галстук", "Гитара", "Гора", "Град", "Гриб", "Губка", "Гусь", 
-"Гараж", "Гроб", "Гнездо", "Галактика", "Дверь", "Дерево", "Джем", "Джинсы", "Диван", "Дом", 
-"Доска", "Дочь", "Дракон", "Дворец", "Джентельмен", "Жара", "Жираф", "Жаба", "Железо", "Журнал", 
-"Жвачка", "Жена", "Замóк", "Звезда", "Звонок", "Зебра", "Зеркало", "Зерно", "Змея", "Зуб", 
-"Игла", "Испуг", "Капля", "Капуста", "Капюшон", "Карандаш", "Карась", "Картон", "Картошка", 
-"Клетка", "Ключ", "Книга", "Колбаса", "Колено", "Колесо", "Компьютер", "Конь", "Коньяк", "Корабль", 
-"Коробка", "Кот", "Кошелек", "Кран", "Краска", "Кресло", "Кровать", "Крот", "Крышка", "Кукла", 
-"Кукуруза", "Курица", "Ладонь", "Лампа", "Лестница", "Ложка", "Лужа", "Лопата", "Луна", "Лётчик", 
-"Маска", "Маяк", "Медаль", "Медведь", "Меч", "Микрофон", "Молоко", "Море", "Мотоцикл", "Музыка", 
-"Мыло", "Мышь", "Мясо", "Мяч", "Огонь", "Окно", "Орех", "Остров", "Орёл", "Обед", 
-"Оружие", "Организм", "Обои", "Отель", "Палка", "Папка", "Пар", "Парик", "Парк", "Паста", 
-"Пельмени", "Печь", "Пистолет", "Пламя", "Планета", "Пластик", "Платье", "Плита", "Погода", "Подарок", 
-"Подушка", "Пол", "Полка", "Портфель", "Поцелуй", "Пушка", "Рука", "Ручка", "Рыба", "Раб", 
-"Ракета", "Салат", "Самолет", "Санки", "Свет", "Секунда", "Сирень", "Скамейка", "Слон", "Собака", 
-"Солнце", "Спальня", "Спинка", "Спорт", "Стакан", "Статуя", "Стена", "Стол", "Стрекоза", "Стрела", 
-"Стул", "Сумка", "Сыр", "Телефон", "Тень", "Торт", "Трактор", "Тряпка", "Теория", "Труба", 
-"Туалет", "Флаг", "Фламинго", "Фонарь", "Фото", "Фрукт", "Фабрика", "Фобия", "Файл", "Цветок", 
-"Цель", "Цепочка", "Цыплёнок", "Циркуль", "Чайник", "Часы", "Человек", "Челюсть", "Чемодан", "Череп", 
-"Черепаха", "Черника", "Шапка", "Шарик", "Шарф", "Шляпа", "Шоколад", "Яблоко", "Язык", "Яйцо", 
-"Ящик", "Яд", "Ягода", "Яхта", "Яма", "Ягуар"]
+const wordsRU = ["Автомобиль", "Арбуз", "Актёр", "Ангел", "Аэропорт", "Анекдот", "Аттестат", "Бактерия", "Бабочка", "Банан",
+"Банк", "Баран", "Багажник", "Бассейн", "Батарейка", "Билет", "Блюдо", "Болт", "Бомба", "Баня",
+"Букет", "Булка", "Бутылка", "Ведро", "Веревка", "Весна", "Вилка", "Вода", "Воздух", "Волос",
+"Ворона", "Валюта", "Газета", "Галстук", "Гитара", "Гора", "Град", "Гриб", "Губка", "Гусь",
+"Гараж", "Гроб", "Гнездо", "Галактика", "Дверь", "Дерево", "Джем", "Джинсы", "Диван", "Дом",
+"Доска", "Дочь", "Дракон", "Дворец", "Джентельмен", "Жара", "Жираф", "Жаба", "Железо", "Журнал",
+"Жвачка", "Жена", "Замóк", "Звезда", "Звонок", "Зебра", "Зеркало", "Зерно", "Змея", "Зуб",
+"Игла", "Испуг", "Капля", "Капуста", "Капюшон", "Карандаш", "Карась", "Картон", "Картошка",
+"Клетка", "Ключ", "Книга", "Колбаса", "Колено", "Колесо", "Компьютер", "Конь", "Коньяк", "Корабль",
+"Коробка", "Кот", "Кошелек", "Кран", "Краска", "Кресло", "Кровать", "Крот", "Крышка", "Кукла",
+"Кукуруза", "Курица", "Ладонь", "Лампа", "Лестница", "Ложка", "Лужа", "Лопата", "Луна", "Лётчик",
+"Маска", "Маяк", "Медаль", "Медведь", "Меч", "Микрофон", "Молоко", "Море", "Мотоцикл", "Музыка",
+"Мыло", "Мышь", "Мясо", "Мяч", "Огонь", "Окно", "Орех", "Остров", "Орёл", "Обед",
+"Оружие", "Организм", "Обои", "Отель", "Палка", "Папка", "Пар", "Парик", "Парк", "Паста",
+"Пельмени", "Печь", "Пистолет", "Пламя", "Планета", "Пластик", "Платье", "Плита", "Погода", "Подарок",
+"Подушка", "Пол", "Полка", "Портфель", "Поцелуй", "Пушка", "Рука", "Ручка", "Рыба", "Раб",
+"Ракета", "Салат", "Самолет", "Санки", "Свет", "Секунда", "Сирень", "Скамейка", "Слон", "Собака",
+"Солнце", "Спальня", "Спинка", "Спорт", "Стакан", "Статуя", "Стена", "Стол", "Стрекоза", "Стрела",
+"Стул", "Сумка", "Сыр", "Телефон", "Тень", "Торт", "Трактор", "Тряпка", "Теория", "Труба",
+"Туалет", "Флаг", "Фламинго", "Фонарь", "Фото", "Фрукт", "Фабрика", "Фобия", "Файл", "Цветок",
+"Цель", "Цепочка", "Цыплёнок", "Циркуль", "Чайник", "Часы", "Человек", "Челюсть", "Чемодан", "Череп",
+"Черепаха", "Черника", "Шапка", "Шарик", "Шарф", "Шляпа", "Шоколад", "Яблоко", "Язык", "Яйцо",
+"Ящик", "Яд", "Ягода", "Яхта", "Яма", "Ягуар"];
 ```

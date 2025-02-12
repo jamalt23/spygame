@@ -32,8 +32,7 @@ const languages = {
 };
 const $langSelect = $('#language-select');
 
-selectLanguage(localStorage.language);
-
+$langSelect.selectric();
 $langSelect.on('change', function () {
     const newLang = this.value;
     if (newLang !== localStorage.language) {
@@ -41,6 +40,7 @@ $langSelect.on('change', function () {
     }
 });
 
+selectLanguage(localStorage.language);
 function selectLanguage(lang) {
     if (!Object.keys(languages).includes(lang)) {
         console.warn(`Invalid language code: ${lang}. Defaulting to English.`);

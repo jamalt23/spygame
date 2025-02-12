@@ -19,22 +19,10 @@ body {
 
 main { min-height: 100vh; }
 
-div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#language-select {
-    cursor: pointer;
-    background-color: #f2f2f2;
-    border: 1px solid #ccc;
-    appearance: none;
-    outline: none;
-}
-
 #game-setup {
+    display: flex;
     flex-direction: column;
+    align-items: center;
     user-select: none;
     -webkit-user-select: none;
 }
@@ -45,11 +33,20 @@ div {
 }
 .btn-dark { --bs-btn-bg: #343a40; }
 
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #player-count, #arrows .btn { text-shadow: var(--text-glow); }
 #player-count { font-size: 3.5em; }
 
 .player-card {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-color: #434343;
     min-width: 250px;
 }
